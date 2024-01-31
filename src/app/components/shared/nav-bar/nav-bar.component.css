@@ -1,0 +1,43 @@
+nav{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 30px 60px 30px;
+    padding-top: 10px;
+}
+h2{
+    color: white;
+    margin: 0;
+}
+ul{
+    display: flex;
+    padding: 0 20px;
+    gap: 10px;
+}
+li{
+    list-style-type: none;
+    margin: 0;
+}
+button{
+    font-size: 15px;
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+    padding: 12px 15px;
+    border-radius: 15px;
+}
+#register{
+    color: white;
+}
+#register:hover{
+    color: #bfb0f2;
+}
+#login{
+    background-color: #bfb0f2;
+    color: black;
+}
+#login:hover{
+    background-color: #a88ffc;
+    color: white;
+}

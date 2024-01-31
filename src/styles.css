@@ -1,1 +1,19 @@
-/* You can add global styles to this file, and also import other style files */
+:root{
+    font-family: 'Rethink Sans', sans-serif;
+    background-color: #151515;
+}
+
+h1 ,h2, h3, h4, h5, h6{
+    text-wrap:balance;
+}
+p{
+    text-wrap: pretty;
+}
+
+html, body { height: 100%; }
+body { margin: 0;}
+
+.background-dialog {
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}

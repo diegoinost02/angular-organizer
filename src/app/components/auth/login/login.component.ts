@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-login',
@@ -9,4 +10,16 @@ import { Component } from '@angular/core';
 })
 export class LoginComponent {
 
+  private diaglog = inject(MatDialog);
+
+  openRegister(): void {
+    const dialogRef = this.diaglog.open(LoginComponent, {
+      data: { name: 'test' },
+      height: 'auto', width: '350px',
+      backdropClass: "background-dialog"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    })
+  }
 }

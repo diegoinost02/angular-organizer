@@ -1,0 +1,48 @@
+header{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.header-container{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    align-items: center;
+    justify-content: center;
+    width: 1200px;
+}
+
+div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: first baseline;
+    width: 100%;
+}
+h1{
+    text-align: left;
+    color: white;
+    margin: 10px 0px;
+    font-size: 60px;
+}
+p{
+    text-align: left;
+    color: rgba(255, 255, 255, 0.536);
+}
+.img{
+    display: flex;
+    align-items: end;
+}
+img{
+    width: 500px;
+    height: 400px;
+}
+a{
+    margin-top: 40px;
+    padding: 12px 35px;
+    border-radius: 15px;
+    color: rgb(25, 25, 25);
+    background-color: rgb(255, 162, 162);
+    text-decoration: none;
+}
