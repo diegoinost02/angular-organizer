@@ -17,3 +17,5 @@ body { margin: 0;}
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(10px);
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

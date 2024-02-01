@@ -1,7 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { RegisterComponent } from '../../auth/register/register.component';
-import { LoginComponent } from '../../auth/login/login.component';
+import { AuthDialogService } from '../../../services/auth-dialog.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -12,27 +10,12 @@ import { LoginComponent } from '../../auth/login/login.component';
 })
 export class NavBarComponent {
 
-  private diaglog = inject(MatDialog);
+  private authDialog = inject(AuthDialogService);
 
   openRegister(): void {
-    const dialogRef = this.diaglog.open(RegisterComponent, {
-      data: { name: 'test' },
-      height: 'auto', width: '350px',
-      backdropClass: "background-dialog"
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    })
+    this.authDialog.openRegister();
   }
-
   openLogin(): void {
-    const dialogRef = this.diaglog.open(LoginComponent, {
-      data: { name: 'test' },
-      height: 'auto', width: '350px',
-      backdropClass: "background-dialog"
-    });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    })
+    this.authDialog.openLogin();
   }
 }

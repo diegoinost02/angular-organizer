@@ -1,10 +1,54 @@
-<!-- <p>register works!</p> -->
-<div class="popup-container">
+<section>
+    <div>
+        <form>
+            <div class="title">
+                <h1>Organizer</h1>
+            </div>
 
-    <h4 mat-dialog-title class="custom-dialog-title"> {{data.name}} </h4>
+            <mat-form-field>
+            <mat-label>Nombre de usuario</mat-label>
+            <input matInput placeholder="Ingrese su usuario">
 
-    <div mat-dialog-conten class="content">
-        <span> {{data.name}} </span>
+            <!-- <mat-hint>Errors appear instantly!</mat-hint>
+            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
+            <mat-error>Please enter a valid email address</mat-error>
+            }
+            @if (emailFormControl.hasError('required')) {
+            <mat-error>Email is <strong>required</strong></mat-error>
+            } -->
+
+            </mat-form-field>
+        
+            <mat-form-field>
+            <mat-label>Email</mat-label>
+            <input matInput placeholder="Ingrese su email">
+            </mat-form-field>
+
+
+            <mat-form-field>
+                <mat-label>Contraseña</mat-label>
+                <!-- <input matInput placeholder="Ingrese su contraseña" type="password"> -->
+                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Ingrese su contraseña">
+                <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button> -->
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Confirmar contraseña</mat-label>
+                <input matInput placeholder="Confirme su contraseña" type="password">
+            </mat-form-field>
+
+            <button class="button-submit" type="submit">Registrarse</button>
+        </form>
+
+        <footer class="footer">
+            <p>¿Ya tienes una cuenta? <button class="button-login" (click)="openLogin()">Iniciar sesión</button></p>
+
+        </footer>
     </div>
-    
-</div>
+
+    <div class="svg-container">
+        <img src="/assets/svg/auth.svg" alt="auth-svg">
+    </div>
+</section>
