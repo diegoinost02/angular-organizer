@@ -11,22 +11,21 @@ export class AuthService {
 
   private http = inject(HttpClient);
 
-  apiUrl = environment.API_URL;
+  apiUrl: string = environment.API_URL;
 
   login(username: string, password: string) {
     return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, {username, password})
   }
 
   create(username: string, email: string, password: string, admin: boolean) { // solo admin
-    return this.http.post<ResponseLogin>(`${this.apiUrl}/register`, {username, email, password, admin})
+    return this.http.post<ResponseLogin>(`${this.apiUrl}/api/users`, {username, email, password, admin})
   }
 
   register (username: string, email: string, password: string) {
     return this.http.post<User>(`${this.apiUrl}/api/users/register`, {username, email, password})
   }
 
-  refreshToken (refreshToken: string) {
-    return this.http.post<ResponseRefresh>(`${this.apiUrl}/api/users/refresh`, {refreshToken})
+  profile(username: string) {
+    return this.http.get<User>(`${this.apiUrl}/${username}`)
   }
-
 }
