@@ -37,10 +37,11 @@ button {
 }
 .button-submit{
     color: white;
-    padding: 10px 0;
+    padding: 15px 0;
     background-color: #c2175b;
     width: 350px;
 }
+
 .button-login{
     color:  #a7a3fc;
     background-color: transparent;

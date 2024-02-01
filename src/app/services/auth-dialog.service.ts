@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { RegisterComponent } from '../components/auth/register/register.component';
 import { LoginComponent } from '../components/auth/login/login.component';
