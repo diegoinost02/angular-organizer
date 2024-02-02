@@ -1,42 +1,82 @@
 <section>
     <div>
-        <form>
+        <form [formGroup]="registerForm" novalidate (ngSubmit)="register()">
             <div class="title">
                 <h1>Organizer</h1>
             </div>
 
             <mat-form-field>
             <mat-label>Nombre de usuario</mat-label>
-            <input matInput placeholder="Ingrese su usuario">
+            <input
+                formControlName="username"
+                type="text"
+                name="username"
+                matInput
+                placeholder="Ingrese su usuario">
 
-            <!-- <mat-hint>Errors appear instantly!</mat-hint>
-            @if (emailFormControl.hasError('email') && !emailFormControl.hasError('required')) {
-            <mat-error>Please enter a valid email address</mat-error>
+            @if (registerForm.controls.username.invalid) {
+                <mat-error>{{getUsernameErrorMessage()}}</mat-error>
             }
-            @if (emailFormControl.hasError('required')) {
-            <mat-error>Email is <strong>required</strong></mat-error>
-            } -->
 
             </mat-form-field>
         
             <mat-form-field>
-            <mat-label>Email</mat-label>
-            <input matInput placeholder="Ingrese su email">
+            <mat-label>Ingrese su email</mat-label>
+            <input
+                formControlName="email"
+                type="email"
+                name="email"
+                matInput
+                placeholder="mail@example.com">
+
+            @if (registerForm.controls.email.invalid) {
+               <mat-error>{{getEmailErrorMessage()}}</mat-error>
+            }
             </mat-form-field>
 
 
             <mat-form-field>
                 <mat-label>Contraseña</mat-label>
-                <!-- <input matInput placeholder="Ingrese su contraseña" type="password"> -->
-                <input matInput [type]="hide ? 'password' : 'text'" placeholder="Ingrese su contraseña">
-                <!-- <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
-                    <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-                </button> -->
+                <input
+                    formControlName="password"
+                    name="password"
+                    matInput
+                    [type]="hidePassword ? 'password' : 'text'"
+                    placeholder="Ingrese su contraseña">
+                 <button
+                    type="button"
+                    mat-icon-button
+                    matSuffix
+                    (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword"
+                    class="button-view-password">
+                    <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+                @if (registerForm.controls.password.invalid) {
+                    <mat-error>{{getPasswordErrorMessage()}}</mat-error>
+                }
             </mat-form-field>
 
             <mat-form-field>
                 <mat-label>Confirmar contraseña</mat-label>
-                <input matInput placeholder="Confirme su contraseña" type="password">
+                <input
+                    formControlName="confirmPassword"
+                    name="confirmPassword"
+                    matInput
+                    [type]="hideConfirmPassword ? 'password' : 'text'"
+                    placeholder="Confirme su contraseña"
+                    type="password">
+                <button
+                    type="button"
+                    mat-icon-button
+                    matSuffix
+                    (click)="hideConfirmPassword = !hideConfirmPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideConfirmPassword"
+                    class="button-view-password">
+                    <mat-icon>{{hideConfirmPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+                </button>
+
+                @if (registerForm.controls.confirmPassword) {
+                    <mat-error>{{getConfirmPasswordErrorMessage()}}</mat-error>
+                }
             </mat-form-field>
 
             <button class="button-submit" type="submit">Registrarse</button>
@@ -44,11 +84,11 @@
 
         <footer class="footer">
             <p>¿Ya tienes una cuenta? <button class="button-login" (click)="openLogin()">Iniciar sesión</button></p>
-
         </footer>
     </div>
 
     <div class="svg-container">
-        <img src="/assets/svg/auth.svg" alt="auth-svg">
+        <!-- <img src="/assets/svg/auth.svg" alt="auth-svg"> -->
+        <img src="/assets/svg/undraw_to_the_moon_re_q21i.svg" alt="auth.svg">
     </div>
 </section>

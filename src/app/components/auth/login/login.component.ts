@@ -2,23 +2,62 @@ import { Component, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
-import {FormsModule} from '@angular/forms';
+import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
 import { AuthDialogService } from '../../../services/auth-dialog.service';
+import { RequestStatus } from '../../../interfaces/request-status.model';
+import { Router } from '@angular/router';
+import { AuthService } from '../../../services/auth.service';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatInputModule, MatFormFieldModule, FormsModule, MatIconModule],
+  imports: [MatInputModule, MatFormFieldModule, FormsModule, MatIconModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
+  private formBuilder = inject(FormBuilder);
+  private authService = inject(AuthService);
+  private router = inject(Router);
+
   private authDialog = inject(AuthDialogService);
   private dialogRef = inject(MatDialogRef);
   public data = inject(MAT_DIALOG_DATA);
 
-  hide = true;
+  status: RequestStatus = 'init';
+  hidePassword = true;
+
+  loginForm = this.formBuilder.nonNullable.group({
+    username: ['', [Validators.required]],
+    password: ['', [Validators.required]]
+  })
+
+  login(): void{
+    if(this.loginForm.valid) {
+      this.status = 'loading';
+      const { username, password } = this.loginForm.getRawValue();
+      this.authService.login(username, password).subscribe({
+        next: () => {
+          this.status = 'success';
+          this.router.navigate(['/home']);
+        },
+        error: () => {
+          this.status = 'failed';
+        }
+      })
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
+  }
+
+  getUsernameErrorMessage() {
+    return this.loginForm.controls.username.hasError('required') ? 'Debe ingresar un nombre de usuario' : '';
+  }
+
+  getPasswordErrorMessage() {
+    return this.loginForm.controls.password.hasError('required') ? 'Debe ingresar una contraseña' : '';
+  }
 
   openRegister(): void {
     this.dialogRef.close();
