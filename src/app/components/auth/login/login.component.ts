@@ -8,10 +8,12 @@ import { AuthDialogService } from '../../../services/auth-dialog.service';
 import { RequestStatus } from '../../../interfaces/request-status.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [MatInputModule, MatFormFieldModule, FormsModule, MatIconModule, ReactiveFormsModule],
+  imports: [MatInputModule, MatFormFieldModule, FormsModule, MatIconModule, ReactiveFormsModule, MatProgressSpinnerModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -41,6 +43,7 @@ export class LoginComponent {
         next: () => {
           this.status = 'success';
           this.router.navigate(['/home']);
+          this.dialogRef.close();
         },
         error: () => {
           this.status = 'failed';

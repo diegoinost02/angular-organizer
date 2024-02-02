@@ -41,7 +41,11 @@ button {
     padding: 15px 0;
     background-color: #c2175b;
     width: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 .button-login{
     color:  #a7a3fc;
     background-color: transparent;

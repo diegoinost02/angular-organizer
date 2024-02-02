@@ -12,7 +12,8 @@
                 type="text"
                 name="username"
                 matInput
-                placeholder="Ingrese su usuario">
+                placeholder="Ingrese su usuario"
+                autocomplete="off">
 
             @if (loginForm.controls.username.invalid) {
                 <mat-error>{{getUsernameErrorMessage()}}</mat-error>
@@ -40,12 +41,17 @@
                 }
             </mat-form-field>
 
-            <button class="button-submit" type="submit">Iniciar Sesión</button>
+            <button class="button-submit" type="submit">
+                @if (status==='loading') {
+                    <mat-spinner color="accent" [diameter]="15"></mat-spinner>
+                } @else {
+                    Iniciar Sesión
+                }
+            </button>
         </form>
 
         <footer class="footer">
             <p>No tienes una cuenta? <button class="button-login" (click)="openRegister()">Registrarse</button></p>
-
         </footer>
     </div>
 

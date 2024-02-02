@@ -9,11 +9,12 @@ import { CustomValidators } from '../../../utils/validators';
 import { RequestStatus } from '../../../interfaces/request-status.model';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [MatInputModule, MatFormFieldModule, FormsModule, MatIconModule, ReactiveFormsModule],
+  imports: [MatInputModule, MatFormFieldModule, FormsModule, MatIconModule, ReactiveFormsModule, MatProgressSpinnerModule],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })
@@ -49,6 +50,7 @@ export class RegisterComponent {
         next: () =>{
           this.status = 'success';
           this.router.navigate(['/home'])
+          this.dialogRef.close();
         },
         error: () => {
           this.status = 'failed';
