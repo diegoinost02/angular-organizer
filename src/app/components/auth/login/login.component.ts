@@ -9,6 +9,7 @@ import { RequestStatus } from '../../../interfaces/request-status.model';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent {
   private authDialog = inject(AuthDialogService);
   private dialogRef = inject(MatDialogRef);
   public data = inject(MAT_DIALOG_DATA);
+  private snackBar = inject(MatSnackBar);
 
   status: RequestStatus = 'init';
   hidePassword = true;
@@ -47,11 +49,37 @@ export class LoginComponent {
         },
         error: () => {
           this.status = 'failed';
+          this.openSnackBar('Usuario o contraseña incorrectos', 'Cerrar');
         }
       })
     } else {
       this.loginForm.markAllAsTouched();
     }
+  }
+
+  // login(): void{
+  //   if(this.loginForm.valid) {
+  //     this.status = 'loading';
+  //     setTimeout(() => {
+  //       const { username, password } = this.loginForm.getRawValue();
+  //       this.authService.login(username, password).subscribe({
+  //         next: () => {
+  //           this.status = 'success';
+  //           this.router.navigate(['/home']);
+  //           this.dialogRef.close();
+  //         },
+  //         error: () => {
+  //           this.status = 'failed';
+  //         }
+  //       })
+  //     }, 2000);
+  //   } else {
+  //     this.loginForm.markAllAsTouched();
+  //   }
+  // }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
   }
 
   getUsernameErrorMessage() {

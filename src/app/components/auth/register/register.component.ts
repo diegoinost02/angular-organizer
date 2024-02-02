@@ -10,6 +10,7 @@ import { RequestStatus } from '../../../interfaces/request-status.model';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -28,6 +29,7 @@ export class RegisterComponent {
   private authDialog = inject(AuthDialogService);
   private dialogRef = inject(MatDialogRef);
   public data = inject(MAT_DIALOG_DATA);
+  private snackBar = inject(MatSnackBar);
 
   status: RequestStatus = 'init';
   hidePassword = true;
@@ -54,11 +56,19 @@ export class RegisterComponent {
         },
         error: () => {
           this.status = 'failed';
+          this.openSnackBar('Error al registrar el usuario', 'Cerrar')
         }}
       )
     } else {
+      if (this.registerForm.controls.password.value !== this.registerForm.controls.confirmPassword.value) {
+        this.openSnackBar('Las contraseñas no coinciden', 'Cerrar')
+      }
       this.registerForm.markAllAsTouched();
     }
+  }
+
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action);
   }
 
   getEmailErrorMessage() {
