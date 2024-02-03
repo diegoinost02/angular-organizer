@@ -4,6 +4,7 @@ section{
     align-items: center;
     justify-content: center;
     width: 100%;
+    margin-bottom: 80px;
 }
 .container{
     display: flex;
