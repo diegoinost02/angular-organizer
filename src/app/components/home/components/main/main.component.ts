@@ -1,18 +1,17 @@
 import { Component } from '@angular/core';
-import { SideBarComponent } from '../side-bar/side-bar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { Folder } from '../../../../interfaces/folder.model';
+import { NotesComponent } from '../notes/notes.component';
+import { FooterComponent } from '../../../shared/footer/footer.component';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [MatSidenavModule,SideBarComponent],
+  imports: [MatSidenavModule, NotesComponent, FooterComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent {
-  showFiller = false;
-
 
   folders: Folder[] = [
     {
