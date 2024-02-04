@@ -34,13 +34,13 @@ p{
     display: flex;
     align-items: end;
 }
-img{
+.image-app{
     border-radius: 15px;
     width: 520px;
     height: 390px;
     object-fit: cover;
 }
-button{
+.get-started-button{
     cursor: pointer;
     font-size: 16px;
     border: none;
@@ -50,4 +50,21 @@ button{
     color: rgb(25, 25, 25);
     background-color: rgb(255, 162, 162);
     text-decoration: none;
+
+    width: 160px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+
+    position: relative;
+    overflow: hidden;
+}
+.svg{
+    width: 20px;
+}
+
+.get-started-button:hover .svg {
+    transform: translateX(2px);
+    transition: transform 0.3s ease;
 }

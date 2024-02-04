@@ -193,34 +193,6 @@ export class NotesComponent {
       description: 'Description 26',
       folders: [],
       status: true
-    },
-    {
-      id: 27,
-      title: 'Note 27',
-      description: 'Description 27',
-      folders: [],
-      status: true
-    },
-    {
-      id: 28,
-      title: 'Note 28',
-      description: 'Description 28',
-      folders: [],
-      status: true
-    },
-    {
-      id: 29,
-      title: 'Note 29',
-      description: 'Description 29',
-      folders: [],
-      status: true
-    },
-    {
-      id: 30,
-      title: 'Note 30',
-      description: 'Description 30',
-      folders: [],
-      status: true
     }
   ];
 }
