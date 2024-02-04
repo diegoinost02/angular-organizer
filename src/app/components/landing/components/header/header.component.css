@@ -55,7 +55,7 @@ p{
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 2px;
+    gap: 1px;
 
     position: relative;
     overflow: hidden;
@@ -65,6 +65,6 @@ p{
 }
 
 .get-started-button:hover .svg {
-    transform: translateX(2px);
+    transform: translateX(3px);
     transition: transform 0.3s ease;
 }
