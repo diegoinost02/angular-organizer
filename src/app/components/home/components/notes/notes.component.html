@@ -1,11 +1,14 @@
 <section>
-    <h1>Notas</h1>
+    <h1>Todas las notas</h1>
     <div class="notes-container">
         @for (note of notes; track $index) {
             <div class="note-card">
-                <h2>{{ note.title }}</h2>
+                <header>
+                    <h2>{{ note.title }}</h2>
+                    <button><img src="/assets/svg/edit.svg" alt="edit"></button>
+                </header>
                 <p>{{ note.description }}</p>
             </div>
         }
-    </div>
+    </div>    
 </section>
