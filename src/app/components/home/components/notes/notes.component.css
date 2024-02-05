@@ -5,7 +5,6 @@ section{
     padding: 30px 80px;
     min-height: 100%;
     box-sizing: border-box;
-    border-top: .5px solid #5a5a5a;
 }
   
 h1{
@@ -22,10 +21,13 @@ h1{
 }
 .note-card{
     background-color: rgb(30, 30, 30);
+    border: .5px solid rgb(30, 30, 30);
+
     border-radius: 7px;  
-    border: 1px solid #5a5a5a;
     box-sizing: border-box;
     padding: 15px;
+    cursor: pointer;
+    box-sizing: border-box;
 
     h2{
         margin: 0;
@@ -33,6 +35,9 @@ h1{
     p{
         color: #c7c7c7;
     }
+}
+.note-card:hover{
+    border: .5px solid #5a5a5a;
 }
 header{
     width: 100%;
@@ -48,13 +53,18 @@ button{
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
-    font-size: 20px;
-    background-color: #323232;
+    color: black;
+    font-size: 15px;
+    /* background-color: #323232; */
+    background-color: rgb(247, 174, 174);
+    opacity: .9;
     border-radius: 10px;
-    padding: 2px 14px 2px 8px;
-    gap: 1px;
+    padding: 2px 18px;
+    gap: 2px;
 }
 .add-note-svg{
-    height: 25px;
+    height: 18px;
+}
+.edit-note-svg{
+    height: 18px;
 }

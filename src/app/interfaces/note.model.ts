@@ -6,4 +6,5 @@ export interface Note {
     description: string;
     folders: Role[];
     status: boolean;
+    userId: number;
 }

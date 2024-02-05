@@ -17,27 +17,32 @@ export class MainComponent {
     {
       id: 1,
       name: "Todas las notas",
-      notes: []
+      notes: [],
+      userId: 1
     },
     {
       id: 2,
       name: "Compras",
-      notes: []
+      notes: [],
+      userId: 1
     },
     {
       id: 3,
       name: "Tareas",
-      notes: []
+      notes: [],
+      userId: 1
     },
     {
       id: 4,
       name: "Programación",
-      notes: []
+      notes: [],
+      userId: 1
     },
     {
       id: 5,
       name: "Universidad",
-      notes: []
+      notes: [],
+      userId: 1
     }
   ];
 

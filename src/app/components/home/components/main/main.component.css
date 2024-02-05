@@ -7,7 +7,6 @@ mat-drawer-container {
 mat-drawer {
     background-color: rgb(26, 25, 25);
     /* background-color: #151515; */
-    border-top: .5px solid #5a5a5a;
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -16,7 +15,9 @@ mat-drawer {
     justify-content: center;
     text-align: center;
     padding: 0 20px 20px 20px;
+    font-size: 14px;
 }
+
 h3{
     margin-top: 40px;
     margin-bottom: 40px;
@@ -46,12 +47,14 @@ ul{
 
 li{
     /* background-color: rgb(50, 49, 49); */
-
-    background-color: rgb(30, 30, 30);
+    /* background-color: rgb(30, 30, 30); */
+    
+    background-color: rgb(35, 35, 35);
+    opacity: .85;
     display: flex;
     list-style-type: none;
     border-radius: 7px;  
-    border: 1px solid #5a5a5a;
+    /* border: 1px solid #5a5a5a; */
     box-sizing: border-box;
     width: 100%;
 }
@@ -106,10 +109,12 @@ button{
     margin-top: 10px;
 
     padding: 10px;
-    font-size: 16px;
+    font-size: 14px;
     gap: 5px;
 
     border-radius: 7px; 
+    border: none;
+    opacity: .9;
 
     cursor: pointer;
 
@@ -121,14 +126,14 @@ button:hover{
     /* background-color: rgb(40, 40, 40); */
 }
 .add-folder-button{
-    border: 1px solid #5a5a5a;    
+    /* border: 1px solid #5a5a5a;     */
     color: white;
 }
 /* .add-folder-button:hover{
     background-color: rgb(34, 55, 100);
 } */
 .archived-folders-button{
-    border: 1px solid #5a5a5a;    
+    /* border: 1px solid #5a5a5a;     */
     color: white;
 }
 /* .archived-folders-button:hover{

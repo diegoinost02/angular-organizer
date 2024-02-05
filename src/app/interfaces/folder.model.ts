@@ -4,4 +4,5 @@ export interface Folder {
     id: number;
     name: string;
     notes: Note[];
+    userId: number;
 }

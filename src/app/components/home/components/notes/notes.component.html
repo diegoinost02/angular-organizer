@@ -1,9 +1,9 @@
 <section>
     <header>
         <h1>Notas</h1>
-        <button class="add-note">
-            <img class="add-note-svg" src="/assets/svg/add-note.svg" alt="add">
+        <button class="add-note" (click)="createNote()">
             Crear nota
+            <img class="add-note-svg" src="/assets/svg/add-note.svg" alt="add">
         </button>
     </header>
     <div class="notes-container">
@@ -11,9 +11,9 @@
             <div class="note-card">
                 <header>
                     <h2>{{ note.title }}</h2>
-                    <button>
-                        <img class="edit-note" src="/assets/svg/edit.svg" alt="edit">
-                    </button>
+                    <!-- <button>
+                        <img class="edit-note-svg" src="/assets/svg/edit.svg" alt="edit">
+                    </button> -->
                 </header>
                 <p>{{ note.description }}</p>
             </div>
