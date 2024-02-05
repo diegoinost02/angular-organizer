@@ -14,7 +14,7 @@
         <ul class="folders-container">
             <p>Carpetas</p>
 
-            @for (folder of folders; track $index) {
+            <!-- @for (folder of folders; track $index) {
                 <li class="folder-container">
                     <a class="ancor-folder" (mouseenter)="images[$index] = openedFolder" (mouseleave)="images[$index] = closedFolder">
                         <img class="svg" [src]="images[$index]" alt="folder">
@@ -24,17 +24,34 @@
                         <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
                     </div>
                 </li>
+            } -->
+
+            @for (folder of folders; track $index) {
+                <li class="folder-container">
+                    <a class="ancor-folder" 
+                    (mouseenter)="currentFolder = $index" (mouseleave)="currentFolder = -1">
+                        <img class="svg" [src]="(currentFolder === $index) ? openedFolder : closedFolder" alt="folder">
+                        {{ folder.name }}
+                    </a>
+                    <div class="menu">
+                        <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
+                    </div>
+                </li>
             }
         </ul>
-        <button>
+        <button class="add-folder-button">
             <img class="svg" src="/assets/svg/add-folder.svg" alt="folder">
             Crear carpeta
+        </button>
+
+        <button class="archived-folders-button">
+            <img class="svg" src="/assets/svg/archived-folder.svg" alt="folder">
+            Archivado 
         </button>
       </div>
     </mat-drawer>
 
-    <app-notes></app-notes>
-    
+    <app-notes></app-notes>    
 </mat-drawer-container>
 
 <app-footer></app-footer>

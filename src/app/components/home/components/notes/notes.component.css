@@ -5,6 +5,7 @@ section{
     padding: 30px 80px;
     min-height: 100%;
     box-sizing: border-box;
+    border-top: .5px solid #5a5a5a;
 }
   
 h1{
@@ -42,4 +43,18 @@ button{
     background-color: transparent;
     border: none;
     cursor: pointer;
+}
+.add-note{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 20px;
+    background-color: #323232;
+    border-radius: 10px;
+    padding: 2px 14px 2px 8px;
+    gap: 1px;
+}
+.add-note-svg{
+    height: 25px;
 }

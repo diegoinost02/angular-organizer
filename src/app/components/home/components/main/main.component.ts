@@ -16,39 +16,41 @@ export class MainComponent {
   folders: Folder[] = [
     {
       id: 1,
-      name: "Carpeta 1",
+      name: "Todas las notas",
       notes: []
     },
     {
       id: 2,
-      name: "Carpeta 2",
+      name: "Compras",
       notes: []
     },
     {
       id: 3,
-      name: "Carpeta 3",
+      name: "Tareas",
       notes: []
     },
     {
       id: 4,
-      name: "Carpeta 4",
+      name: "Programación",
       notes: []
     },
     {
       id: 5,
-      name: "Carpeta 5",
+      name: "Universidad",
       notes: []
     }
   ];
 
-  images: string[] = [
-    "/assets/svg/folder.svg",
-    "/assets/svg/folder.svg",
-    "/assets/svg/folder.svg",
-    "/assets/svg/folder.svg",
-    "/assets/svg/folder.svg"
-  ];
+  // images: string[] = [
+  //   "/assets/svg/folder.svg",
+  //   "/assets/svg/folder.svg",
+  //   "/assets/svg/folder.svg",
+  //   "/assets/svg/folder.svg",
+  //   "/assets/svg/folder.svg"
+  // ];
   
+  // image: string = "/assets/svg/folder.svg";
   closedFolder = "/assets/svg/folder.svg";
   openedFolder = "/assets/svg/opened-folder.svg";
+  currentFolder: number = -1;
 }
