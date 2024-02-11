@@ -8,7 +8,7 @@
     </header>
     <div class="notes-container">
         @for (note of notes; track $index) {
-            <div class="note-card">
+            <div class="note-card" (click)="openNote(note)">
                 <header>
                     <h2>{{ note.title }}</h2>
                     <!-- <button>

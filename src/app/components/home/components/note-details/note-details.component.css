@@ -1,0 +1,13 @@
+mat-dialog-content {
+    width: 800px;
+    height: 500px;
+}
+h2{
+    color: white;
+    font-size: 35px;
+    padding: 20px 0;
+}
+p{
+    color: rgb(197, 197, 197);
+    font-size: 18px;
+}

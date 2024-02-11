@@ -105,8 +105,11 @@ export class NotesComponent {
     }
   ];
 
+  openNote(note: Note) {
+    this.noteService.openNoteDetails(note);
+  }
   createNote() {
-    
+    this.noteService.openNoteForm();
   }
 
 }

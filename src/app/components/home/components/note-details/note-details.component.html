@@ -1,0 +1,45 @@
+@if (!idEditing) {
+    <mat-dialog-content class="mat-typography">
+        <h2> {{noteData.title}} </h2>
+        <p> {{noteData.description}} </p>
+    </mat-dialog-content>
+    
+    <mat-dialog-actions align="end">
+    
+        <button id="edit-btn" mat-button (click)="idEditing = !idEditing">
+            Editar
+        </button>
+    
+        <button id="delete-btn" mat-button (click)="deleteNote()">
+            Eliminar
+        </button>
+    
+        <button id="close-btn" mat-button mat-dialog-close>
+            Cerrar
+        </button>
+    
+    </mat-dialog-actions>
+    
+} @else{
+    <mat-dialog-content class="mat-typography">
+        <h2> {{noteData.title}} </h2>
+        <p> {{noteData.description}} </p>
+        <!-- <input type="text" [value]="noteData.title"> -->
+    </mat-dialog-content>
+    
+    <mat-dialog-actions align="end">
+
+        <button id="close-btn" mat-button mat-dialog-close (click)="idEditing = !idEditing">
+            Cancelar
+        </button>
+
+        <button id="edit-btn" mat-button (click)="guardar()">
+            Guardar
+        </button>
+    
+        <button id="close-btn" mat-button mat-dialog-close>
+            Cerrar
+        </button>
+    
+    </mat-dialog-actions>
+}

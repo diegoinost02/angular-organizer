@@ -3,6 +3,9 @@ import { Injectable, inject } from '@angular/core';
 import { environment } from '../environments/environments';
 import { Note } from '../interfaces/note.model';
 import { checkToken } from '../interceptors/token.interceptor';
+import { MatDialog } from '@angular/material/dialog';
+import { NoteDetailsComponent } from '../components/home/components/note-details/note-details.component';
+import { NoteFormComponent } from '../components/home/components/note-form/note-form.component';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +13,7 @@ import { checkToken } from '../interceptors/token.interceptor';
 export class NoteService {
 
   private http = inject(HttpClient);
+  private dialog = inject(MatDialog);
 
   apiUrl: string = environment.API_URL;
 
@@ -31,5 +35,26 @@ export class NoteService {
 
   deleteNote(id: number) {
     return this.http.delete(`${this.apiUrl}/api/notes/${id}`, { context: checkToken() })
+  }
+
+  openNoteDetails(note: Note) {
+    const dialogRef = this.dialog.open(NoteDetailsComponent, {
+      data: note,
+      height: 'auto', width: 'auto',
+      backdropClass: "background-dialog"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    })
+  }
+
+  openNoteForm(){
+    const dialogRef = this.dialog.open(NoteFormComponent, {
+      height: 'auto', width: 'auto',
+      backdropClass: "background-dialog"
+    });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    })
   }
 }
