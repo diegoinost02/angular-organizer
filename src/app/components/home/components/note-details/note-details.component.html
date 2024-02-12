@@ -1,45 +1,36 @@
-@if (!idEditing) {
-    <mat-dialog-content class="mat-typography">
-        <h2> {{noteData.title}} </h2>
-        <p> {{noteData.description}} </p>
-    </mat-dialog-content>
-    
-    <mat-dialog-actions align="end">
-    
-        <button id="edit-btn" mat-button (click)="idEditing = !idEditing">
-            Editar
-        </button>
-    
-        <button id="delete-btn" mat-button (click)="deleteNote()">
-            Eliminar
-        </button>
-    
-        <button id="close-btn" mat-button mat-dialog-close>
-            Cerrar
-        </button>
-    
-    </mat-dialog-actions>
-    
-} @else{
-    <mat-dialog-content class="mat-typography">
-        <h2> {{noteData.title}} </h2>
-        <p> {{noteData.description}} </p>
-        <!-- <input type="text" [value]="noteData.title"> -->
-    </mat-dialog-content>
-    
-    <mat-dialog-actions align="end">
+<mat-dialog-content class="mat-typography">
+    <form action="">
+        <input
+            class="title-edit"
+            type="text"
+            [value]="noteData.title"
+            maxlength="20"
+            >
+        <textarea
+            class="description-edit"
+            type="text"
+            [value]="noteData.description"
+            maxlength="2000"
+            >
+        </textarea>
+    </form>
+</mat-dialog-content>
 
-        <button id="close-btn" mat-button mat-dialog-close (click)="idEditing = !idEditing">
-            Cancelar
-        </button>
+<mat-dialog-actions align="end">
+     <button id="close-btn" mat-button mat-dialog-close>
+        Cancelar
+    </button>
 
-        <button id="edit-btn" mat-button (click)="guardar()">
-            Guardar
-        </button>
+    <button id="edit-btn" mat-button (click)="save()">
+        Guardar
+    </button>
+
+    <button id="delete-btn" mat-button (click)="deleteNote()">
+        Eliminar
+    </button>
+        
+    <button id="close-btn" mat-button mat-dialog-close>
+        Cerrar
+    </button>
     
-        <button id="close-btn" mat-button mat-dialog-close>
-            Cerrar
-        </button>
-    
-    </mat-dialog-actions>
-}
+</mat-dialog-actions>

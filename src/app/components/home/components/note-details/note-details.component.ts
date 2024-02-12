@@ -14,13 +14,11 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 export class NoteDetailsComponent {
   
   private dialogRef = inject(MatDialogRef);
-  protected noteData: Note = inject(MAT_DIALOG_DATA);
 
-  idEditing: boolean = false;
+  noteData: Note = inject(MAT_DIALOG_DATA);
+  noteToEdit: Note = {...this.noteData};
 
-  guardar() {}
-
-  editNote() {}
+  save() {}
 
   deleteNote() {}
 }
