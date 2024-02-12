@@ -3,29 +3,20 @@
       <h3>Organizer</h3>
       <div class="ul-container">
         <ul class="profile-container">
-            <p>Usuario</p>
+            <strong>Usuario</strong>
             <li class="profile">
                 <a class="ancor-profile">
-                    <img class="svg" src="/assets/svg/profile.svg" alt="profile">
-                    diegoinost</a>
+                    <!-- <img class="svg" src="/assets/svg/profile.svg" alt="profile"> -->
+                    Hola, <span>diegoinost</span> 👋
+                </a>
+                <div class="menu">
+                    <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
+                </div>
             </li>
             
         </ul>
         <ul class="folders-container">
-            <p>Carpetas</p>
-
-            <!-- @for (folder of folders; track $index) {
-                <li class="folder-container">
-                    <a class="ancor-folder" (mouseenter)="images[$index] = openedFolder" (mouseleave)="images[$index] = closedFolder">
-                        <img class="svg" [src]="images[$index]" alt="folder">
-                        {{ folder.name }}
-                    </a>
-                    <div class="menu">
-                        <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
-                    </div>
-                </li>
-            } -->
-
+            <strong>Carpetas</strong>
             @for (folder of folders; track $index) {
                 <li class="folder-container">
                     <a class="ancor-folder" 

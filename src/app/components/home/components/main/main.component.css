@@ -5,7 +5,7 @@ mat-drawer-container {
 }
 
 mat-drawer {
-    background-color: rgb(26, 25, 25);
+    background-color: rgb(34, 34, 34);
     /* background-color: #151515; */
     display: flex;
     flex-direction: column;
@@ -22,6 +22,9 @@ mat-drawer {
 h3{
     margin-top: 40px;
     margin-bottom: 40px;
+    padding-left: 8px;
+    font-size: 20px;
+    text-align: start;
 }
 .ul-container{
     display: flex;
@@ -35,22 +38,23 @@ ul{
     align-items: baseline;
     justify-content: center;
     width: 100%;
-    gap: 10px;
+    gap: 7px;
     margin: 0;
     padding: 0;
 }
 .profile-container{
-    padding-bottom: 40px;
+    margin-bottom: 12px;
+    padding-bottom: 12px;
 }
 .folders-container{
-    padding-bottom: 20px;
+    padding-bottom: 0px;
 }
 
 li{
     /* background-color: rgb(50, 49, 49); */
     /* background-color: rgb(30, 30, 30); */
     
-    background-color: rgb(35, 35, 35);
+    background-color: transparent;
     opacity: .85;
     display: flex;
     list-style-type: none;
@@ -58,15 +62,14 @@ li{
     /* border: 1px solid #5a5a5a; */
     box-sizing: border-box;
     width: 100%;
-}
-.folder-container{
+
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
 
-p{
-    padding-left: 10px;
+strong{
+    padding-left: 8px;
     margin: 0;
 }
 a{
@@ -78,9 +81,11 @@ a{
     cursor: pointer;
     color: white;  
     width: 100%;
-    padding: 10px;
+    padding: 8px 10px;
 }
-
+.ancor-profile span{
+    font-style:oblique;
+}
 li:hover{
     background-color: rgb(52, 51, 51);
 }
@@ -96,10 +101,16 @@ li:hover{
 }
 .img-menu{
     transition: transform 0.5s ease;
+    height: 20px;
 }
 .menu:hover {
     .img-menu{
-        transform: rotate(90deg);
+        transform: rotate(-90deg);
+    }
+}
+.profile:hover{
+    .img-menu{
+        transform: rotate(-90deg);
     }
 }
 button{
@@ -109,7 +120,7 @@ button{
     width: 100%;
     margin-top: 10px;
 
-    padding: 10px;
+    padding: 8px 10px;
     font-size: 14px;
     gap: 5px;
 
@@ -119,7 +130,8 @@ button{
 
     cursor: pointer;
 
-    background-color: rgb(26, 44, 82);
+    /* background-color: rgb(26, 44, 82); */
+    background-color: rgb(41, 41, 41);
     /* background-color: rgb(27, 26, 26); */
 }
 button:hover{
