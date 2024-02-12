@@ -1,15 +1,15 @@
 <mat-dialog-content class="mat-typography">
-    <form action="">
+    <form [formGroup]="noteForm" (ngSubmit)="saveChanges()">
         <input
+            formControlName="title"
             class="title-edit"
             type="text"
-            [value]="noteData.title"
             maxlength="20"
             >
         <textarea
+            formControlName="description"
             class="description-edit"
             type="text"
-            [value]="noteData.description"
             maxlength="2000"
             >
         </textarea>
@@ -21,11 +21,11 @@
         Cancelar
     </button>
 
-    <button id="edit-btn" mat-button (click)="save()">
+    <button type="submit" id="edit-btn" mat-button (click)="saveChanges()">
         Guardar
     </button>
 
-    <button id="delete-btn" mat-button (click)="deleteNote()">
+    <button id="delete-btn" mat-button (click)="deleteNote(noteData.id)">
         Eliminar
     </button>
         
