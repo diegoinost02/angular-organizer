@@ -17,20 +17,16 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-     <button id="close-btn" mat-button mat-dialog-close>
-        Cancelar
+    <button id="close-btn" mat-button mat-dialog-close matTooltip="Cerrar">
+        <img class="svg" src="/assets/svg/close.svg" alt="close">
     </button>
 
-    <button type="submit" id="edit-btn" mat-button (click)="saveChanges()">
-        Guardar
+    <button type="submit" id="edit-btn" mat-button (click)="saveChanges()" matTooltip="Guardar">
+        <img class="svg" src="/assets/svg/save.svg" alt="save">
     </button>
 
-    <button id="delete-btn" mat-button (click)="deleteNote(noteData.id)">
-        Eliminar
-    </button>
-        
-    <button id="close-btn" mat-button mat-dialog-close>
-        Cerrar
+    <button id="delete-btn" mat-button (click)="deleteNote(noteData.id)" matTooltip="Eliminar">
+        <img class="svg" src="/assets/svg/trash.svg" alt="delete">
     </button>
     
 </mat-dialog-actions>
