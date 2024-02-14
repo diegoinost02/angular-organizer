@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { Note } from '../../../../interfaces/note.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { FormBuilder, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoteService } from '../../../../services/note.service';
 import { RequestStatus } from '../../../../interfaces/request-status.model';
 import {MatTooltipModule} from '@angular/material/tooltip';
