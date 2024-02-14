@@ -7,7 +7,7 @@ export const routes: Routes = [
         loadComponent: () => import('./components/landing/landing.component').then(c => c.LandingComponent)
     },
     {
-        path: 'home',
+        path: ':username',
         loadComponent: () => import('./components/home/home.component').then(c => c.HomeComponent),
         children: [
             {

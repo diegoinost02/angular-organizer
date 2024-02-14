@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, inject} from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { Folder } from '../../../../interfaces/folder.model';
 import { NotesComponent } from '../notes/notes.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
+import { User, UserModel } from '../../../../interfaces/user.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-main',
@@ -11,7 +13,17 @@ import { FooterComponent } from '../../../shared/footer/footer.component';
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent {
+export class MainComponent implements OnInit{
+
+  user: UserModel = new UserModel();
+  private route = inject(ActivatedRoute);
+
+  ngOnInit(): void {
+    this.route.params.subscribe(params => {
+      this.user.username = params['username'];
+    })
+  }
+
 
   folders: Folder[] = [
     {

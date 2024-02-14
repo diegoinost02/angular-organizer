@@ -44,7 +44,7 @@ export class LoginComponent {
       this.authService.login(username, password).subscribe({
         next: () => {
           this.status = 'success';
-          this.router.navigate(['/home']);
+          this.router.navigate([`/${username}`]);
           this.dialogRef.close();
         },
         error: () => {

@@ -51,7 +51,7 @@ export class RegisterComponent {
       this.authService.registerAndLogin(username, email, password).subscribe({
         next: () =>{
           this.status = 'success';
-          this.router.navigate(['/home'])
+          this.router.navigate([`/${username}`]);
           this.dialogRef.close();
         },
         error: () => {
