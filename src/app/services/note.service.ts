@@ -25,6 +25,10 @@ export class NoteService {
     return this.http.get(`${this.apiUrl}/api/notes/user/${userId}`, { context: checkToken() })
   }
 
+  getUserNotesByStatus(userId: number, status: boolean) {
+    return this.http.get(`${this.apiUrl}/api/notes/user/${userId}/status/${status}`, { context: checkToken() })
+  }
+
   createNote(note: Note) {
     return this.http.post(`${this.apiUrl}/api/notes`, {note}, { context: checkToken() })
   }
