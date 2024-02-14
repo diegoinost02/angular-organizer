@@ -37,6 +37,10 @@ export class NoteService {
     return this.http.put(`${this.apiUrl}/api/notes/${note.id}`, {note}, { context: checkToken() })
   }
 
+  archiveNoteById(id: number) {
+    return this.http.put(`${this.apiUrl}/api/notes/${id}/archive`, { context: checkToken() })
+  }
+
   deleteNote(id: number) {
     return this.http.delete(`${this.apiUrl}/api/notes/${id}`, { context: checkToken() })
   }

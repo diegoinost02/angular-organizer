@@ -21,6 +21,10 @@
         <img class="svg" src="/assets/svg/close.svg" alt="close">
     </button>
 
+    <button id="file-off-btn" mat-button mat-dialog-close (click)="archiveNote(noteData.id)" matTooltip="Archivar">
+        <img class="svg" src="/assets/svg/file-off.svg" alt="close">
+    </button>
+
     <button type="submit" id="edit-btn" mat-button (click)="saveChanges()" matTooltip="Guardar">
         <img class="svg" src="/assets/svg/save.svg" alt="save">
     </button>

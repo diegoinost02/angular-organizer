@@ -42,7 +42,7 @@ export class NoteDetailsComponent implements OnDestroy{
   }
   openSnackBar(message: string, actionMessage: string, action: () => void) {
     this._snackBar.open(message, actionMessage, {
-      duration: 5000,
+      duration: 6000,
     }).onAction().subscribe({
       next: () => {
         action();
@@ -63,6 +63,17 @@ export class NoteDetailsComponent implements OnDestroy{
         }
       })
     }
+  }
+  
+  archiveNote(id: number): void {
+    this.noteService.archiveNoteById(id).subscribe({
+      next: () => {
+        this.statusDeleteNote = 'success';
+      },
+      error: () => {
+        this.statusDeleteNote = 'failed';
+      }
+    })
   }
 
   deleteNote(id: number): void {
