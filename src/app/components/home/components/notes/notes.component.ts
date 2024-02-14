@@ -86,22 +86,6 @@ export class NotesComponent {
       folders: [],
       status: true,
       userId: 1
-    },
-    {
-      id: 10,
-      title: 'Note 10',
-      description: 'Description 10',
-      folders: [],
-      status: true,
-      userId: 1,
-    },
-    {
-      id: 11,
-      title: 'Note 11',
-      description: 'Description 11',
-      folders: [],
-      status: true,
-      userId: 1
     }
   ];
 
