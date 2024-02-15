@@ -1,4 +1,4 @@
-<mat-drawer-container class="container" autosize>
+<mat-drawer-container class="container" autosize *ngIf="user$ | async as user">
     <mat-drawer #drawer class="side-bar" mode="side" opened>
       <h3>Organizer</h3>
       <div class="ul-container">
@@ -6,7 +6,6 @@
             <strong>Usuario</strong>
             <li class="profile">
                 <a class="ancor-profile">
-                    <!-- <img class="svg" src="/assets/svg/profile.svg" alt="profile"> -->
                     Hola, <span> {{user.username}} </span> 👋
                 </a>
                 <div class="menu">

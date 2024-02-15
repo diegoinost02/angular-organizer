@@ -1,33 +1,34 @@
-import { Component, OnInit, inject, signal} from '@angular/core';
+import { Component, OnInit, inject} from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { Folder } from '../../../../interfaces/folder.model';
 import { NotesComponent } from '../notes/notes.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
-import { User, UserModel } from '../../../../interfaces/user.model';
+import { User } from '../../../../interfaces/user.model';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
+import { BehaviorSubject } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-main',
   standalone: true,
-  imports: [MatSidenavModule, NotesComponent, FooterComponent],
+  imports: [MatSidenavModule, NotesComponent, FooterComponent, CommonModule],
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
 export class MainComponent implements OnInit{
 
-  user: UserModel = new UserModel();
+  user$ = new BehaviorSubject<User | null>(null);
   private route = inject(ActivatedRoute);
   private userService = inject(UserService);
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.user.username = params['username'];
+      const username = params['username'];
 
-      this.userService.getProfile(this.user.username).subscribe({
+      this.userService.getProfile(username).subscribe({
         next: (user: User) => {
-          this.user = user;
-          console.log(this.user);
+          this.user$.next(user);
         }
       })
     })

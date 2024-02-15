@@ -16,19 +16,21 @@ h1{
 .notes-container{
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(1000px, 1fr));
-    gap: 20px;
+    /* grid-template-columns: repeat(1, 1fr); */
+    gap: 10px;
     margin-top: 30px;
 }
 .note-card{
-    background-color: rgb(30, 30, 30);
+    /* background-color: rgb(30, 30, 30); */
+    background-color: rgb(40, 40, 40);
     border: .5px solid rgb(30, 30, 30);
 
-    border-radius: 7px;  
+    border-radius: 5px;  
     box-sizing: border-box;
     padding: 15px;
     cursor: pointer;
     box-sizing: border-box;
-    min-height: 140px;
+    min-height: 170px;
     h2{
         margin: 0;
     }
