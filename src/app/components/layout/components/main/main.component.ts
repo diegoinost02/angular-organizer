@@ -16,23 +16,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent implements OnInit{
+export class MainComponent{
 
-  user$ = new BehaviorSubject<User | null>(null);
-  private route = inject(ActivatedRoute);
   private userService = inject(UserService);
-
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      const username = params['username'];
-
-      this.userService.getProfile(username).subscribe({
-        next: (user: User) => {
-          this.user$.next(user);
-        }
-      })
-    })
-  }
+  user$ = this.userService.user$;
 
 
   folders: Folder[] = [

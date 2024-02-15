@@ -2,10 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../environments/environments';
 import { Note } from '../interfaces/note.model';
-import { checkToken } from '../interceptors/token.interceptor';
 import { MatDialog } from '@angular/material/dialog';
-import { NoteDetailsComponent } from '../components/home/components/note-details/note-details.component';
-import { NoteFormComponent } from '../components/home/components/note-form/note-form.component';
+import { NoteDetailsComponent } from '../components/layout/components/note-details/note-details.component';
+import { NoteFormComponent } from '../components/layout/components/note-form/note-form.component';
 import { TokenService } from './token.service';
 
 @Injectable({

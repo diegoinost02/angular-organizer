@@ -2,8 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { environment } from '../environments/environments';
 import { Folder } from '../interfaces/folder.model';
-import { User } from '../interfaces/user.model';
-import { checkToken } from '../interceptors/token.interceptor';
 import { TokenService } from './token.service';
 
 @Injectable({

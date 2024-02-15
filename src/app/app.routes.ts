@@ -8,17 +8,17 @@ export const routes: Routes = [
     },
     {
         path: ':username',
-        loadComponent: () => import('./components/home/home.component').then(c => c.HomeComponent),
+        loadComponent: () => import('./components/layout/layout.component').then(c => c.LayoutComponent),
         children: [
             {
                 path: '',
                 title: 'Organizer',
-                loadComponent: () => import('./components/home/components/main/main.component').then(c => c.MainComponent)
+                loadComponent: () => import('./components/layout/components/main/main.component').then(c => c.MainComponent)
             },
             {
                 path: 'profile',
                 title: 'Profile',
-                loadComponent: () => import('./components/home/components/profile/profile.component').then(c => c.ProfileComponent)
+                loadComponent: () => import('./components/layout/components/profile/profile.component').then(c => c.ProfileComponent)
             }
         ]
     },
