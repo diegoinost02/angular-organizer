@@ -6,6 +6,7 @@ import { checkToken } from '../interceptors/token.interceptor';
 import { MatDialog } from '@angular/material/dialog';
 import { NoteDetailsComponent } from '../components/home/components/note-details/note-details.component';
 import { NoteFormComponent } from '../components/home/components/note-form/note-form.component';
+import { TokenService } from './token.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,35 +15,71 @@ export class NoteService {
 
   private http = inject(HttpClient);
   private dialog = inject(MatDialog);
+  private tokenService = inject(TokenService);
 
   apiUrl: string = environment.API_URL;
 
   getNotes() {
-    return this.http.get(`${this.apiUrl}/api/notes`, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.get(`${this.apiUrl}/api/notes`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   getUserNotes(userId: number) {
-    return this.http.get(`${this.apiUrl}/api/notes/user/${userId}`, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.get(`${this.apiUrl}/api/notes/user/${userId}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   getUserNotesByStatus(userId: number, status: boolean) {
-    return this.http.get(`${this.apiUrl}/api/notes/user/${userId}/status/${status}`, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.get(`${this.apiUrl}/api/notes/user/${userId}/status/${status}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   createNote(note: Note) {
-    return this.http.post(`${this.apiUrl}/api/notes`, {note}, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.post(`${this.apiUrl}/api/notes`, {note}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   updateNote(note: Note) {
-    return this.http.put(`${this.apiUrl}/api/notes/${note.id}`, {note}, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.put(`${this.apiUrl}/api/notes/${note.id}`, {note}, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   archiveNoteById(id: number) {
-    return this.http.put(`${this.apiUrl}/api/notes/${id}/archive`, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.put(`${this.apiUrl}/api/notes/${id}/archive`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   deleteNote(id: number) {
-    return this.http.delete(`${this.apiUrl}/api/notes/${id}`, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.delete(`${this.apiUrl}/api/notes/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 
   openNoteDetails(note: Note) {

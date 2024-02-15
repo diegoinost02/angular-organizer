@@ -17,7 +17,19 @@
         </ul>
         <ul class="folders-container">
             <strong>Carpetas</strong>
-            @for (folder of folders; track $index) {
+            <!-- @for (folder of folders; track $index) {
+                <li class="folder-container">
+                    <a class="ancor-folder" 
+                    (mouseenter)="currentFolder = $index" (mouseleave)="currentFolder = -1">
+                        <img class="svg" [src]="(currentFolder === $index) ? openedFolder : closedFolder" alt="folder">
+                        {{ folder.name }}
+                    </a>
+                    <div class="menu">
+                        <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
+                    </div>
+                </li>
+            } -->
+            @for (folder of user.folders; track $index) {
                 <li class="folder-container">
                     <a class="ancor-folder" 
                     (mouseenter)="currentFolder = $index" (mouseleave)="currentFolder = -1">

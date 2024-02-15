@@ -5,7 +5,6 @@ import { ResponseLogin, ResponseRefresh } from '../interfaces/response.model';
 import { User } from '../interfaces/user.model';
 import { switchMap, tap } from 'rxjs';
 import { TokenService } from './token.service';
-import { checkToken } from '../interceptors/token.interceptor';
 
 @Injectable({
   providedIn: 'root'
@@ -13,15 +12,15 @@ import { checkToken } from '../interceptors/token.interceptor';
 export class AuthService {
 
   private http = inject(HttpClient)
-  private tokenServicec = inject(TokenService)
+  private tokenService = inject(TokenService)
 
   apiUrl: string = environment.API_URL;
 
   login(username: string, password: string) {
     return this.http.post<ResponseLogin>(`${this.apiUrl}/login`, { username, password })
     .pipe(tap(response =>{
-      this.tokenServicec.saveToken(response.token)
-      this.tokenServicec.saveRefreshToken(response.refresh_token)
+      this.tokenService.saveToken(response.token)
+      this.tokenService.saveRefreshToken(response.refresh_token)
     }))
   }
 
@@ -35,18 +34,28 @@ export class AuthService {
   }
 
   refreshToken(refreshToken: string) {
-    return this.http.post<ResponseRefresh>(`${this.apiUrl}/api/users/refresh`, { refreshToken }, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.post<ResponseRefresh>(`${this.apiUrl}/api/users/refresh`, { refreshToken }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
     .pipe(tap(response =>{
-      this.tokenServicec.saveToken(response.token)
-      this.tokenServicec.saveRefreshToken(response.refresh_token)
+      this.tokenService.saveToken(response.token)
+      this.tokenService.saveRefreshToken(response.refresh_token)
     }))
   }
 
-  profile(username: string) {
-    return this.http.get<User>(`${this.apiUrl}/${username}`, { context: checkToken() })
-  }
+  // getProfile(username: string) {
+  //   return this.http.get<User>(`${this.apiUrl}/api/users/user/${username}`, { context: checkToken() })
+  // }
 
   create(username: string, email: string, password: string, admin: boolean) { // solo admin
-    return this.http.post<ResponseLogin>(`${this.apiUrl}/api/users`, { username, email, password, admin }, { context: checkToken() })
+    const token = this.tokenService.getToken();
+    return this.http.post<ResponseLogin>(`${this.apiUrl}/api/users`, { username, email, password, admin }, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
   }
 }
