@@ -58,7 +58,7 @@ export class NoteService {
 
   createNote(note: Note) {
     const token = this.tokenService.getToken();
-    return this.http.post(`${this.apiUrl}/api/notes`, {note}, {
+    return this.http.post(`${this.apiUrl}/api/notes/create`, {note}, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -67,7 +67,7 @@ export class NoteService {
 
   updateNote(note: Note) {
     const token = this.tokenService.getToken();
-    return this.http.put(`${this.apiUrl}/api/notes/${note.id}`, {note}, {
+    return this.http.put(`${this.apiUrl}/api/notes/update/${note.id}`, {note}, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -76,7 +76,7 @@ export class NoteService {
 
   archiveNoteById(id: number) {
     const token = this.tokenService.getToken();
-    return this.http.put(`${this.apiUrl}/api/notes/${id}/archive`, {
+    return this.http.put(`${this.apiUrl}/api/notes/archive/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -85,7 +85,7 @@ export class NoteService {
 
   deleteNote(id: number) {
     const token = this.tokenService.getToken();
-    return this.http.delete(`${this.apiUrl}/api/notes/${id}`, {
+    return this.http.delete(`${this.apiUrl}/api/notes/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

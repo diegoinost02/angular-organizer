@@ -46,13 +46,9 @@ export class AuthService {
     }))
   }
 
-  // getProfile(username: string) {
-  //   return this.http.get<User>(`${this.apiUrl}/api/users/user/${username}`, { context: checkToken() })
-  // }
-
   create(username: string, email: string, password: string, admin: boolean) { // solo admin
     const token = this.tokenService.getToken();
-    return this.http.post<ResponseLogin>(`${this.apiUrl}/api/users`, { username, email, password, admin }, {
+    return this.http.post<ResponseLogin>(`${this.apiUrl}/api/users/create`, { username, email, password, admin }, {
       headers: {
         Authorization: `Bearer ${token}`
       }

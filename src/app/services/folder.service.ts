@@ -38,7 +38,7 @@ export class FolderService {
 
   createFolder(folder: Folder) {
     const token = this.tokenService.getToken();
-    return this.http.post<Folder>(`${this.apiUrl}/api/folders`, {folder}, {
+    return this.http.post<Folder>(`${this.apiUrl}/api/folders/create`, {folder}, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -47,7 +47,7 @@ export class FolderService {
 
   updateFolder(folder: Folder) {
     const token = this.tokenService.getToken();
-    return this.http.put<Folder>(`${this.apiUrl}/api/folders/${folder.id}`, {folder}, {
+    return this.http.put<Folder>(`${this.apiUrl}/api/folders/update/${folder.id}`, {folder}, {
       headers: {
         Authorization: `Bearer ${token}`
       }
@@ -56,7 +56,7 @@ export class FolderService {
 
   deleteFolder(id: number) {
     const token = this.tokenService.getToken();
-    return this.http.delete<Folder>(`${this.apiUrl}/api/folders/${id}`, {
+    return this.http.delete<Folder>(`${this.apiUrl}/api/folders/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }
