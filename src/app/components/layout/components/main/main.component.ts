@@ -3,11 +3,9 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import { Folder } from '../../../../interfaces/folder.model';
 import { NotesComponent } from '../notes/notes.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
-import { User } from '../../../../interfaces/user.model';
-import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../../../../services/user.service';
-import { BehaviorSubject } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { FolderService } from '../../../../services/folder.service';
 
 @Component({
   selector: 'app-main',
@@ -16,54 +14,21 @@ import { CommonModule } from '@angular/common';
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent{
+export class MainComponent implements OnInit{
 
   private userService = inject(UserService);
+  private folderService = inject(FolderService);
+
   user$ = this.userService.user$;
+  userFolders$ = this.folderService.userFolders$;
 
+  ngOnInit(): void {
+      this.folderService.folderSelected.update(() => this.userFolders$()[0]);
+  }
+  selectFolder(folder: Folder) {
+    this.folderService.folderSelected.update(() => folder);
+  }
 
-  folders: Folder[] = [
-    {
-      id: 1,
-      name: "Todas las notas",
-      notes: [],
-      userId: 1
-    },
-    {
-      id: 2,
-      name: "Compras",
-      notes: [],
-      userId: 1
-    },
-    {
-      id: 3,
-      name: "Tareas",
-      notes: [],
-      userId: 1
-    },
-    {
-      id: 4,
-      name: "Programación",
-      notes: [],
-      userId: 1
-    },
-    {
-      id: 5,
-      name: "Universidad",
-      notes: [],
-      userId: 1
-    }
-  ];
-
-  // images: string[] = [
-  //   "/assets/svg/folder.svg",
-  //   "/assets/svg/folder.svg",
-  //   "/assets/svg/folder.svg",
-  //   "/assets/svg/folder.svg",
-  //   "/assets/svg/folder.svg"
-  // ];
-  
-  // image: string = "/assets/svg/folder.svg";
   closedFolder = "/assets/svg/folder.svg";
   openedFolder = "/assets/svg/opened-folder.svg";
   currentFolder: number = -1;

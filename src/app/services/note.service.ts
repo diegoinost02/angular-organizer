@@ -1,11 +1,12 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, signal } from '@angular/core';
 import { environment } from '../environments/environments';
 import { Note } from '../interfaces/note.model';
 import { MatDialog } from '@angular/material/dialog';
 import { NoteDetailsComponent } from '../components/layout/components/note-details/note-details.component';
 import { NoteFormComponent } from '../components/layout/components/note-form/note-form.component';
 import { TokenService } from './token.service';
+import { tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,6 +17,7 @@ export class NoteService {
   private dialog = inject(MatDialog);
   private tokenService = inject(TokenService);
 
+  userNotes$ = signal<Note[]>([])
   apiUrl: string = environment.API_URL;
 
   getNotes() {
@@ -34,6 +36,15 @@ export class NoteService {
         Authorization: `Bearer ${token}`
       }
     })
+  }
+
+  getNoteByFolderIdAndStatus(folderId: number, status: boolean) { // !!
+    const token = this.tokenService.getToken();
+    return this.http.get<Note[]>(`${this.apiUrl}/api/notes/folder/${folderId}/status/${status}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    }).pipe(tap(notes => this.userNotes$.update(() => notes)))
   }
 
   getUserNotesByStatus(userId: number, status: boolean) {

@@ -1,13 +1,13 @@
 <section>
     <header>
-        <h1>Notas</h1>
+        <h1> {{folderSelected()?.name}} </h1>
         <button class="add-note" (click)="createNote()">
             Crear nota
             <img class="add-note-svg" src="/assets/svg/add-note.svg" alt="add">
         </button>
     </header>
     <div class="notes-container">
-        @for (note of notes; track $index) {
+        @for (note of userNotes$(); track $index) {
             <div class="note-card" (click)="openNote(note)">
                 <header>
                     <h2>{{ note.title }}</h2>
