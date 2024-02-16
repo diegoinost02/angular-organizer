@@ -26,6 +26,8 @@ export class NoteDetailsComponent implements OnDestroy{
 
   private _snackBar = inject(MatSnackBar);
 
+  userNotes$ = this.noteService.userNotes$;
+
   statusSaveNote: RequestStatus = 'init';
   statusDeleteNote: RequestStatus = 'init';
 
@@ -37,10 +39,10 @@ export class NoteDetailsComponent implements OnDestroy{
   // Para advertir al usuario que no ha guardado los cambios 
   ngOnDestroy(): void {
       if(this.noteForm.dirty && this.statusSaveNote === 'init') {
-        this.openSnackBar('No has guardado los cambios', 'Guardar', this.saveChanges);
+        this.openSnackBarWithAction('No has guardado los cambios', 'Guardar', this.saveChanges);
       }
   }
-  openSnackBar(message: string, actionMessage: string, action: () => void) {
+  openSnackBarWithAction(message: string, actionMessage: string, action: () => void) {
     this._snackBar.open(message, actionMessage, {
       duration: 6000,
     }).onAction().subscribe({
@@ -50,16 +52,25 @@ export class NoteDetailsComponent implements OnDestroy{
     });
   }
 
+  openSnackBar(message: string, action: string) {
+    this._snackBar.open(message, action, { duration: 3000})
+  }
   saveChanges(): void {
     if(this.noteForm.value !== this.noteData) {
       const { title, description } = this.noteForm.getRawValue();
-      
       this.noteService.updateNote({ ...this.noteData, title, description }).subscribe({
-        next: () =>{
+        next: (note: Note) => {
+          this.userNotes$.update((notes) => {
+            notes[note.id-1] = note;
+            return notes
+          }
+          );
           this.statusSaveNote = 'success';
+          this.openSnackBar('Cambios guardados con éxito', 'Cerrar');
         },
         error: () => {
           this.statusSaveNote = 'failed';
+          this.openSnackBar('No se pudieron guardar los cambios', 'Cerrar');
         }
       })
     }
@@ -69,9 +80,11 @@ export class NoteDetailsComponent implements OnDestroy{
     this.noteService.archiveNoteById(id).subscribe({
       next: () => {
         this.statusDeleteNote = 'success';
+        this.openSnackBar('Nota archivada con éxito', 'Cerrar');
       },
       error: () => {
         this.statusDeleteNote = 'failed';
+        this.openSnackBar('No se pudo archivar la nota', 'Cerrar');
       }
     })
   }
@@ -80,9 +93,11 @@ export class NoteDetailsComponent implements OnDestroy{
     this.noteService.deleteNote(id).subscribe({
       next: () => {
         this.statusDeleteNote = 'success';
+        this.openSnackBar('Nota borrada con éxito', 'Cerrar');
       },
       error: () => {
         this.statusDeleteNote = 'failed';
+        this.openSnackBar('No se pudo borrar la nota', 'Cerrar');
       }
     })
   }

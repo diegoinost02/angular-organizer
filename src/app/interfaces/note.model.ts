@@ -1,10 +1,10 @@
-import { Role } from "./role.model";
+import { Folder } from "./folder.model";
 
 export interface Note {
     id: number;
     title: string;
     description: string;
-    folders: Role[];
-    status: boolean;
     userId: number;
+    folders: Folder[];
+    status: boolean;
 }

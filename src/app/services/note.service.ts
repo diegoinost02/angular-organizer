@@ -67,7 +67,8 @@ export class NoteService {
 
   updateNote(note: Note) {
     const token = this.tokenService.getToken();
-    return this.http.put(`${this.apiUrl}/api/notes/update/${note.id}`, {note}, {
+    const {id, title, description} = note;
+    return this.http.put<Note>(`${this.apiUrl}/api/notes/update/${id}`, {id, title, description}, {
       headers: {
         Authorization: `Bearer ${token}`
       }
