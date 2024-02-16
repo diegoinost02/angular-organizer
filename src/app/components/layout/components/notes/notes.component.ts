@@ -20,7 +20,7 @@ export class NotesComponent implements OnInit{
   userNotes$ = this.noteService.userNotes$;
 
   ngOnInit(): void {
-      this.noteService.getNoteByFolderIdAndStatus(this.folderSelected()!.id, true).subscribe();
+      this.noteService.getNotesByFolderIdAndStatus(this.folderSelected()!.id, true).subscribe();
   }
 
   openNote(note: Note) {

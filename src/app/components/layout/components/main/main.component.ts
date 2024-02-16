@@ -6,6 +6,7 @@ import { FooterComponent } from '../../../shared/footer/footer.component';
 import { UserService } from '../../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { FolderService } from '../../../../services/folder.service';
+import { NoteService } from '../../../../services/note.service';
 
 @Component({
   selector: 'app-main',
@@ -18,6 +19,7 @@ export class MainComponent implements OnInit{
 
   private userService = inject(UserService);
   private folderService = inject(FolderService);
+  private noteService = inject(NoteService);
 
   user$ = this.userService.user$;
   userFolders$ = this.folderService.userFolders$;
@@ -27,6 +29,7 @@ export class MainComponent implements OnInit{
   }
   selectFolder(folder: Folder) {
     this.folderService.folderSelected.update(() => folder);
+    this.noteService.getNotesByFolderIdAndStatus(this.folderService.folderSelected()!.id, true).subscribe();
   }
 
   closedFolder = "/assets/svg/folder.svg";

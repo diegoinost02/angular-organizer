@@ -38,7 +38,7 @@ export class NoteService {
     })
   }
 
-  getNoteByFolderIdAndStatus(folderId: number, status: boolean) { // !!
+  getNotesByFolderIdAndStatus(folderId: number, status: boolean) { // !!
     const token = this.tokenService.getToken();
     return this.http.get<Note[]>(`${this.apiUrl}/api/notes/folder/${folderId}/status/${status}`, {
       headers: {
