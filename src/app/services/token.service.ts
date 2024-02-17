@@ -64,4 +64,18 @@ export class TokenService {
     return tokenDate.getTime() > today.getTime();
   }
 
+  getUsernameFromToken(): string | null {
+    const token = this.getToken();
+    if (!token) {
+      return null;
+    }
+
+    const decodedToken = jwtDecode<JwtPayload>(token);
+    if (!decodedToken || !decodedToken.sub) {
+      return null;
+    }
+
+    return decodedToken.sub;
+  }
+
 }

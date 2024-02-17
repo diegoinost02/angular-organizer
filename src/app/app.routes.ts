@@ -1,14 +1,18 @@
 import { Routes } from '@angular/router';
+import { redirectGuard } from './guards/redirect.guard';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
         path: '',
         title: 'Organizer',
+        canActivate: [redirectGuard],
         loadComponent: () => import('./components/landing/landing.component').then(c => c.LandingComponent)
     },
     {
         path: ':username',
         loadComponent: () => import('./components/layout/layout.component').then(c => c.LayoutComponent),
+        canActivate: [authGuard],
         children: [
             {
                 path: '',
