@@ -1,4 +1,4 @@
-import { Component, OnInit, inject } from '@angular/core';
+import { Component, effect, inject } from '@angular/core';
 import { Note } from '../../../../interfaces/note.model';
 import { NoteService } from '../../../../services/note.service';
 import { FolderService } from '../../../../services/folder.service';
@@ -11,16 +11,18 @@ import { FolderService } from '../../../../services/folder.service';
   styleUrl: './notes.component.css'
 })
 
-export class NotesComponent implements OnInit{
+export class NotesComponent{
 
   private noteService = inject(NoteService)
   private folderService = inject(FolderService)
 
-  folderSelected = this.folderService.folderSelected;
+  folderSelected = this.folderService.folderSelected$;
   userNotes$ = this.noteService.userNotes$;
 
-  ngOnInit(): void {
+  constructor() {
+    effect(()=>{
       this.noteService.getNotesByFolderIdAndStatus(this.folderSelected()!.id, true).subscribe();
+    })
   }
 
   openNote(note: Note) {

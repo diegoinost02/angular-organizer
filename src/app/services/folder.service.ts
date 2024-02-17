@@ -14,7 +14,7 @@ export class FolderService {
   private tokenService = inject(TokenService);
 
   userFolders$ = signal<Folder[]>([])
-  folderSelected = signal<Folder | null>(null)
+  folderSelected$ = signal<Folder | null>(null)
 
   apiUrl: string = environment.API_URL;
 
@@ -33,7 +33,8 @@ export class FolderService {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).pipe(tap(folders => this.userFolders$.update(() => folders)))
+    }).pipe(tap(folders => this.userFolders$.update(() => folders)),
+        tap(folders => this.folderSelected$.update(() => folders[0])))
   }
 
   createFolder(folder: Folder) {
