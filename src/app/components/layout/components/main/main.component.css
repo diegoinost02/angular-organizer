@@ -21,15 +21,34 @@ mat-drawer {
 h3{
     margin-top: 40px;
     margin-bottom: 40px;
-    padding-left: 8px;
-    font-size: 20px;
+    padding: 7px 10px;
+    font-size: 23px;
+    font-weight: 300;
     text-align: start;
+    display: flex;
+    align-items:center;
+    gap: 6px;
+    color: rgb(232, 232, 232);
+    img{
+        width: 27px;
+        height: 27px;
+        border-radius:30%;
+        border: 1px solid #424242;
+    }
+}
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - 130px);
+    justify-content: space-between
 }
 .ul-container{
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    width: 100%;
 }
 ul{
     display: flex;
@@ -37,7 +56,7 @@ ul{
     align-items: baseline;
     justify-content: center;
     width: 100%;
-    gap: 7px;
+    gap: 4px;
     margin: 0;
     padding: 0;
 }
@@ -53,6 +72,9 @@ ul{
         background-color: transparent;
         border: none;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 }
 .overlay{
@@ -126,25 +148,35 @@ li{
 }
 
 strong{
+    color: #f3f0f0;
+    font-size: 11.5px;
+    font-weight: 400;
     padding-left: 8px;
-    margin: 0;
+    margin: 0 0 6px 0;
 }
-a{
+.ancor-folder, .ancor-profile, .ancor-overlay{
     display: flex;
     align-items: center;
     justify-content:baseline;
-    gap: 5px;
+    gap: 7px;
     text-decoration: none;
     cursor: pointer;
     color: white;  
     width: 100%;
     padding: 8px 10px;
+    opacity: .8;
+}
+.ancor-folder, .btn-actions{
+    font-weight: 350;
 }
 .ancor-profile span{
     font-style:oblique;
 }
 li:hover{
     background-color: rgb(52, 51, 51);
+    a{
+        opacity: 1;
+    }
 }
 .svg {
     height: 18px;
@@ -173,33 +205,44 @@ li:hover{
 .selected-menu-user{
     transform: rotate(90deg);
 }
-
-/* buttos */
-.btn-actions{
+.action{
     display: flex;
     align-items: center;
     justify-content: baseline;
+    font-style: normal;
     width: 100%;
-    margin-top: 10px;
 
     padding: 8px 10px;
     font-size: 14px;
-    gap: 5px;
+    gap: 7px;
+    margin-top: 10px;
 
     border-radius: 7px; 
     border: none;
-    opacity: .9;
+    opacity: .8;
 
     cursor: pointer;
-
+    color: white;
     background-color: rgb(41, 41, 41);
 }
-.btn-actions:hover{
+.btn-folders{
+    background-color: rgb(41, 41, 41);
+}
+.btn-folders:hover{
     background-color: rgb(34, 55, 100);
+    opacity: .9;
 }
-.add-folder-button{
-    color: white;
+.end-actions{
+    width: 100%;
 }
-.archived-folders-button{
-    color: white;
+
+.ancor-actions{
+    background-color: rgba(57, 63, 184, 0.782);
+    opacity: .75;
+    padding: 8px 10px;
+    box-sizing: border-box;
+    width: 100%;
+}
+.ancor-actions:hover{
+    opacity: .9;
 }
