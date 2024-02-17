@@ -25,4 +25,9 @@ export class UserService {
       }
     }).pipe(tap(user => this.user$.update(() => user)))
   }
+
+  logout() {
+    this.tokenService.removeRefreshToken();
+    this.tokenService.removeToken();
+  }
 }

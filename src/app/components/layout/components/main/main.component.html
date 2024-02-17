@@ -4,38 +4,54 @@
       <div class="ul-container">
         <ul class="profile-container">
             <strong>Usuario</strong>
-            <li class="profile">
+            <li class="side-li profile" cdkOverlayOrigin #menuOverlay="cdkOverlayOrigin" (click)="isOpenUserMenu = !isOpenUserMenu" >
                 <a class="ancor-profile">
                     Hola, <span> {{user$()?.username}} </span> 👋
                 </a>
-                <div class="menu">
-                    <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
+                <div class="menu-user">
+                    <button class="btn-menu">
+                        <img class="svg img-menu" src="/assets/svg/menu.svg" alt="menu" [ngClass]="{'selected-menu-user' : isOpenUserMenu === true}">
+                    </button>
+                    <ng-template
+                        cdkConnectedOverlay
+                        [cdkConnectedOverlayOrigin]="menuOverlay"
+                        [cdkConnectedOverlayOpen]="isOpenUserMenu"
+                        [cdkConnectedOverlayHasBackdrop]="true"
+                        (overlayOutsideClick)="isOpenUserMenu = !isOpenUserMenu">
+                        <ul class="overlay">
+                            <p>
+                                <span class="username-overlay">{{user$()?.username}}</span>
+                                <span class="email-overlay">{{user$()?.email}} </span>
+                            </p>
+                            <li><a>Cuenta</a></li>
+                            <li><a (click)="singOff()">Cerrar sesión</a></li>
+                        </ul>
+                    </ng-template>
                 </div>
             </li>
-            
         </ul>
         <ul class="folders-container">
             <strong>Carpetas</strong>
             @for (folder of userFolders$(); track $index) {
-                <li class="folder-container">
+                <li class="side-li folder-container">
                     <a class="ancor-folder"
                     (click)="selectFolder(folder)"
                     (mouseenter)="currentFolder = $index" (mouseleave)="currentFolder = -1">
                         <img class="svg" [src]="(currentFolder === $index) ? openedFolder : closedFolder" alt="folder">
                         {{ folder.name }}
                     </a>
-                    <div class="menu">
+                    <div class="menu-folders">
                         <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
                     </div>
                 </li>
             }
         </ul>
-        <button class="add-folder-button">
+        <button class="btn-actions add-folder-button">
             <img class="svg" src="/assets/svg/add-folder.svg" alt="folder">
             Crear carpeta
         </button>
 
-        <button class="archived-folders-button">
+        <button class="btn-actions archived-folders-button">
             <img class="svg" src="/assets/svg/archived-folder.svg" alt="folder">
             Archivado 
         </button>

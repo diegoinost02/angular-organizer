@@ -6,7 +6,6 @@ mat-drawer-container {
 
 mat-drawer {
     background-color: rgb(34, 34, 34);
-    /* background-color: #151515; */
     display: flex;
     flex-direction: column;
     height: 100%;
@@ -49,17 +48,75 @@ ul{
 .folders-container{
     padding-bottom: 0px;
 }
+.menu-user{
+    .btn-menu{
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
+    }
+}
+.overlay{
+    display: flex;
+    flex-direction: column;
+    /* background-color: rgb(50, 48, 48); */
+    /* background-color: #202326; */
+    background-color: #2e3236;
 
+    padding: 0px;
+    min-width: 200px;
+    border-radius: 5px;
+    gap: 0;
+    p{
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        color: rgb(200, 200, 200);
+        padding: 13px 10px;
+        margin: 0;
+        width: calc(100% - 20px);
+        border-bottom: .5px solid #5a5a5a;
+
+        .username-overlay{
+            font-size: 16px;
+            color: white;
+        }
+        .email-overlay{
+            font-size: 14px;
+            font-style:oblique;
+            color: rgb(178, 178, 178);
+        }
+    }
+    li{
+        background: transparent;
+        width: 100%;
+        a{
+            font-size: 15px;
+            color: rgb(195, 193, 193);
+            width: calc(100% - 20px);
+        }
+        a:hover{
+            color: white;
+        }
+    }
+    li:hover{
+        /* background-color: rgb(213, 110, 0); */
+        background-color: rgb(42, 75, 108);
+    }
+    >:nth-child(2){
+        margin-top: 7px;
+    }
+    >:nth-last-child(1){
+        margin-bottom: 7px;
+    }
+}
 li{
-    /* background-color: rgb(50, 49, 49); */
-    /* background-color: rgb(30, 30, 30); */
-    
+    list-style-type: none;
+}
+.side-li{
     background-color: transparent;
     opacity: .85;
     display: flex;
-    list-style-type: none;
     border-radius: 7px;  
-    /* border: 1px solid #5a5a5a; */
     box-sizing: border-box;
     width: 100%;
 
@@ -92,28 +149,33 @@ li:hover{
 .svg {
     height: 18px;
 }
-.menu{
+.menu-folders{
     cursor: pointer;
 }
-.menu{
+.menu-folders, .btn-menu{
     padding-right: 10px;
     padding-left: 10px;
 }
-.img-menu{
+.img-menu, .selected-menu-user{
     transition: transform 0.5s ease;
     height: 20px;
 }
-.menu:hover {
+.menu-folders:hover {
     .img-menu{
         transform: rotate(-90deg);
     }
 }
 .profile:hover{
     .img-menu{
-        transform: rotate(-90deg);
+        transform: rotate(90deg);
     }
 }
-button{
+.selected-menu-user{
+    transform: rotate(90deg);
+}
+
+/* buttos */
+.btn-actions{
     display: flex;
     align-items: center;
     justify-content: baseline;
@@ -130,25 +192,14 @@ button{
 
     cursor: pointer;
 
-    /* background-color: rgb(26, 44, 82); */
     background-color: rgb(41, 41, 41);
-    /* background-color: rgb(27, 26, 26); */
 }
-button:hover{
+.btn-actions:hover{
     background-color: rgb(34, 55, 100);
-    /* background-color: rgb(40, 40, 40); */
 }
 .add-folder-button{
-    /* border: 1px solid #5a5a5a;     */
     color: white;
 }
-/* .add-folder-button:hover{
-    background-color: rgb(34, 55, 100);
-} */
 .archived-folders-button{
-    /* border: 1px solid #5a5a5a;     */
     color: white;
 }
-/* .archived-folders-button:hover{
-    background-color: rgb(34, 55, 100);
-} */
