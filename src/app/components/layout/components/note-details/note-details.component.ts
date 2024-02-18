@@ -7,7 +7,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoteService } from '../../../../services/note.service';
 import { RequestStatus } from '../../../../interfaces/request-status.model';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatSnackBar} from '@angular/material/snack-bar';
+import { NoteDialogService } from '../../../../services/note-dialog.service';
 
 @Component({
   selector: 'app-note-details',
@@ -23,8 +23,7 @@ export class NoteDetailsComponent implements OnDestroy{
 
   private formBuilder = inject(FormBuilder);
   private noteService = inject(NoteService);
-
-  private _snackBar = inject(MatSnackBar);
+  private noteDialogService = inject(NoteDialogService);
 
   userNotes$ = this.noteService.userNotes$;
 
@@ -40,27 +39,11 @@ export class NoteDetailsComponent implements OnDestroy{
   // Para darle la posibilidad al usuario de guardar los cambios si no lo ha hecho
   async ngOnDestroy(): Promise<void> {
     if (this.noteForm.dirty && this.statusSaveNote === 'init') {
-      const save: boolean = await this.openSnackBarWithPromise('No has guardado los cambios', 'Guardar', this.saveChangesOnDestroy);
+      const save: boolean = await this.noteDialogService.openSnackBarWithPromise('No has guardado los cambios', 'Guardar', this.noteDialogService.saveChangesOnDestroy);
       if (save) {
         this.saveChanges();
       }
     }
-  }
-  saveChangesOnDestroy(): boolean {
-    return true
-  }
-  async openSnackBarWithPromise(message: string, actionMessage: string, action: () => boolean): Promise<boolean> {
-    return new Promise((resolve) => {
-      this._snackBar.open(message, actionMessage, {
-        duration: 6000,
-      }).onAction().subscribe(() => {
-        resolve(action());
-      });
-    });
-  }
-
-  openSnackBar(message: string, action: string) {
-    this._snackBar.open(message, action, { duration: 3000})
   }
   
   saveChanges(): void {
@@ -74,11 +57,11 @@ export class NoteDetailsComponent implements OnDestroy{
           }
           );
           this.statusSaveNote = 'success';
-          this.openSnackBar('Cambios guardados con éxito', 'Cerrar');
+          this.noteDialogService.openSnackBar('Cambios guardados con éxito', 'Cerrar');
         },
         error: () => {
           this.statusSaveNote = 'failed';
-          this.openSnackBar('No se pudieron guardar los cambios', 'Cerrar');
+          this.noteDialogService.openSnackBar('No se pudieron guardar los cambios', 'Cerrar');
         }
       })
     }
@@ -88,11 +71,11 @@ export class NoteDetailsComponent implements OnDestroy{
     this.noteService.archiveNoteById(id).subscribe({
       next: () => {
         this.statusDeleteNote = 'success';
-        this.openSnackBar('Nota archivada con éxito', 'Cerrar');
+        this.noteDialogService.openSnackBar('Nota archivada con éxito', 'Cerrar');
       },
       error: () => {
         this.statusDeleteNote = 'failed';
-        this.openSnackBar('No se pudo archivar la nota', 'Cerrar');
+        this.noteDialogService.openSnackBar('No se pudo archivar la nota', 'Cerrar');
       }
     })
   }
@@ -101,11 +84,11 @@ export class NoteDetailsComponent implements OnDestroy{
     this.noteService.deleteNote(id).subscribe({
       next: () => {
         this.statusDeleteNote = 'success';
-        this.openSnackBar('Nota borrada con éxito', 'Cerrar');
+        this.noteDialogService.openSnackBar('Nota borrada con éxito', 'Cerrar');
       },
       error: () => {
         this.statusDeleteNote = 'failed';
-        this.openSnackBar('No se pudo borrar la nota', 'Cerrar');
+        this.noteDialogService.openSnackBar('No se pudo borrar la nota', 'Cerrar');
       }
     })
   }

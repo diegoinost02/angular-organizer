@@ -1,5 +1,7 @@
+import { User } from "./user.model";
+
 export interface Folder {
     id: number;
     name: string;
-    userId: number;
+    user: User;
 }

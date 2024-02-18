@@ -2,6 +2,8 @@ import { Component, effect, inject } from '@angular/core';
 import { Note } from '../../../../interfaces/note.model';
 import { NoteService } from '../../../../services/note.service';
 import { FolderService } from '../../../../services/folder.service';
+import { NoteDialogService } from '../../../../services/note-dialog.service';
+import { User } from '../../../../interfaces/user.model';
 
 @Component({
   selector: 'app-notes',
@@ -13,8 +15,9 @@ import { FolderService } from '../../../../services/folder.service';
 
 export class NotesComponent{
 
-  private noteService = inject(NoteService)
   private folderService = inject(FolderService)
+  private noteService = inject(NoteService)
+  private noteDialogService = inject(NoteDialogService)
 
   folderSelected = this.folderService.folderSelected$;
   userNotes$ = this.noteService.userNotes$;
@@ -26,10 +29,10 @@ export class NotesComponent{
   }
 
   openNote(note: Note) {
-    this.noteService.openNoteDetails(note);
+    this.noteDialogService.openNoteDetails(note);
   }
   createNote() {
-    this.noteService.openNoteForm();
+    this.noteDialogService.openNoteForm();
   }
 
 }

@@ -1,0 +1,30 @@
+<mat-dialog-content>
+    <form [formGroup]="noteForm" (ngSubmit)="createNote()">
+        <input
+            formControlName="title"
+            class="title-edit"
+            type="text"
+            maxlength="20"
+            placeholder="Título"
+            >
+        <textarea
+            formControlName="description"
+            class="description-edit"
+            type="text"
+            maxlength="2000"
+            placeholder="Descripción"
+            >
+        </textarea>
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button id="close-btn" mat-button mat-dialog-close matTooltip="Cerrar">
+        <img class="svg" src="/assets/svg/close.svg" alt="close">
+    </button>
+
+    <button type="submit" id="edit-btn" mat-button (click)="createNote()" matTooltip="Guardar">
+        <img class="svg" src="/assets/svg/save.svg" alt="save">
+    </button>
+    
+</mat-dialog-actions>
