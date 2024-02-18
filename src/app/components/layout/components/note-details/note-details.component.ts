@@ -36,25 +36,33 @@ export class NoteDetailsComponent implements OnDestroy{
     description: [this.noteData.description, []]
   })
 
-  // Para advertir al usuario que no ha guardado los cambios 
-  ngOnDestroy(): void {
-      if(this.noteForm.dirty && this.statusSaveNote === 'init') {
-        this.openSnackBarWithAction('No has guardado los cambios', 'Guardar', this.saveChanges);
+
+  // Para darle la posibilidad al usuario de guardar los cambios si no lo ha hecho
+  async ngOnDestroy(): Promise<void> {
+    if (this.noteForm.dirty && this.statusSaveNote === 'init') {
+      const save: boolean = await this.openSnackBarWithPromise('No has guardado los cambios', 'Guardar', this.saveChangesOnDestroy);
+      if (save) {
+        this.saveChanges();
       }
+    }
   }
-  openSnackBarWithAction(message: string, actionMessage: string, action: () => void) {
-    this._snackBar.open(message, actionMessage, {
-      duration: 6000,
-    }).onAction().subscribe({
-      next: () => {
-        action();
-      }
+  saveChangesOnDestroy(): boolean {
+    return true
+  }
+  async openSnackBarWithPromise(message: string, actionMessage: string, action: () => boolean): Promise<boolean> {
+    return new Promise((resolve) => {
+      this._snackBar.open(message, actionMessage, {
+        duration: 6000,
+      }).onAction().subscribe(() => {
+        resolve(action());
+      });
     });
   }
 
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, { duration: 3000})
   }
+  
   saveChanges(): void {
     if(this.noteForm.value !== this.noteData) {
       const { title, description } = this.noteForm.getRawValue();
