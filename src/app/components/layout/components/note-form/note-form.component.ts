@@ -2,7 +2,7 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NoteService } from '../../../../services/note.service';
 import { MatButtonModule } from '@angular/material/button';
-import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RequestStatus } from '../../../../interfaces/request-status.model';
@@ -19,6 +19,8 @@ import { UserService } from '../../../../services/user.service';
   styleUrl: './note-form.component.css'
 })
 export class NoteFormComponent {
+
+  private dialogRef = inject(MatDialogRef);
   private formBuilder = inject(FormBuilder);
   private noteService = inject(NoteService);
   private folderService = inject(FolderService);
@@ -35,7 +37,7 @@ export class NoteFormComponent {
 
   statusCreateNote: RequestStatus = 'init'
 
-  // Para darle la posibilidad al usuario de guardar los cambios si no lo ha hecho
+  // Le da al usuario la posibilidad de guardar los cambios si no lo ha hecho
   async ngOnDestroy(): Promise<void> {
     if (this.noteForm.dirty && this.statusCreateNote === 'init') {
       const create: boolean = await this.noteDialogService.openSnackBarWithPromise('No has guardado la nota', 'Guardar', this.noteDialogService.saveChangesOnDestroy);
@@ -54,21 +56,20 @@ export class NoteFormComponent {
       folders: [{id: this.folderSelected$()!.id}],
       status: true
     };
-
-    console.log("note form:" + JSON.stringify(note));
-      this.noteService.createNote(note).subscribe({ 
-        next: (note: Note) => {
-          this.userNotes$.update((notes) => { 
-            notes[length] = note;
-            return notes
-          })
-          this.statusCreateNote = 'success';
-          this.noteDialogService.openSnackBar('Nota creada con éxito', 'Cerrar');
-        },
-        error: () => {
-          this.statusCreateNote = 'failed';
-          this.noteDialogService.openSnackBar('No se pudo crear la nota', 'Cerrar');
-        }
-      })
+    this.noteService.createNote(note).subscribe({ 
+      next: (note: Note) => {
+        this.userNotes$.update((notes) => { 
+          notes.unshift(note);
+          return notes
+        })
+        this.dialogRef.close();
+        this.statusCreateNote = 'success';
+        this.noteDialogService.openSnackBar('Nota creada con éxito', 'Cerrar');
+      },
+      error: () => {
+        this.statusCreateNote = 'failed';
+        this.noteDialogService.openSnackBar('No se pudo crear la nota', 'Cerrar');
+      }
+    })
   }
 }

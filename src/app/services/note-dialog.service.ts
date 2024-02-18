@@ -4,8 +4,6 @@ import { Note } from '../interfaces/note.model';
 import { MatDialog } from '@angular/material/dialog';
 import { NoteDetailsComponent } from '../components/layout/components/note-details/note-details.component';
 import { NoteFormComponent } from '../components/layout/components/note-form/note-form.component';
-import { Folder } from '../interfaces/folder.model';
-import { User } from '../interfaces/user.model';
 
 @Injectable({
   providedIn: 'root'

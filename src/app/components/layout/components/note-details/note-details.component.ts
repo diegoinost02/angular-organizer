@@ -36,7 +36,7 @@ export class NoteDetailsComponent implements OnDestroy{
   })
 
 
-  // Para darle la posibilidad al usuario de guardar los cambios si no lo ha hecho
+  // Le da al usuario la posibilidad de guardar los cambios si no lo ha hecho
   async ngOnDestroy(): Promise<void> {
     if (this.noteForm.dirty && this.statusSaveNote === 'init') {
       const save: boolean = await this.noteDialogService.openSnackBarWithPromise('No has guardado los cambios', 'Guardar', this.noteDialogService.saveChangesOnDestroy);
@@ -80,9 +80,14 @@ export class NoteDetailsComponent implements OnDestroy{
     })
   }
 
-  deleteNote(id: number): void {
+  deleteNote(id: number) {
     this.noteService.deleteNote(id).subscribe({
-      next: () => {
+      next: (note: Note) => {
+        this.userNotes$.update((notes) => {
+          notes.splice(notes.indexOf(note)-1, 1);
+          return notes
+        });
+        this.dialogRef.close();
         this.statusDeleteNote = 'success';
         this.noteDialogService.openSnackBar('Nota borrada con éxito', 'Cerrar');
       },

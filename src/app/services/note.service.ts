@@ -40,7 +40,7 @@ export class NoteService {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).pipe(tap(notes => this.userNotes$.update(() => notes)))
+    }).pipe(tap(notes => this.userNotes$.update(() => notes.slice().reverse())))
   }
 
   getUserNotesByStatus(userId: number, status: boolean) {
@@ -82,7 +82,7 @@ export class NoteService {
 
   deleteNote(id: number) {
     const token = this.tokenService.getToken();
-    return this.http.delete(`${this.apiUrl}/api/notes/delete/${id}`, {
+    return this.http.delete<Note>(`${this.apiUrl}/api/notes/delete/${id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

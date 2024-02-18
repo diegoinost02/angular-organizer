@@ -3,7 +3,6 @@ import { Note } from '../../../../interfaces/note.model';
 import { NoteService } from '../../../../services/note.service';
 import { FolderService } from '../../../../services/folder.service';
 import { NoteDialogService } from '../../../../services/note-dialog.service';
-import { User } from '../../../../interfaces/user.model';
 
 @Component({
   selector: 'app-notes',
