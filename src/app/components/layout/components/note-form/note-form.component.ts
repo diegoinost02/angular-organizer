@@ -20,15 +20,15 @@ import { UserService } from '../../../../services/user.service';
 })
 export class NoteFormComponent {
 
+  private userService = inject(UserService);
   private dialogRef = inject(MatDialogRef);
   private formBuilder = inject(FormBuilder);
   private noteService = inject(NoteService);
-  private folderService = inject(FolderService);
   private noteDialogService = inject(NoteDialogService);
 
-  userNotes$ = this.noteService.userNotes$;
-  user$ = inject(UserService).user$;
-  folderSelected$ = this.folderService.folderSelected$;
+  user$ = this.userService.user$;
+  userNotes$ = this.userService.userNotes$;
+  folderSelected$ = this.userService.folderSelected$;
 
   noteForm = this.formBuilder.nonNullable.group({
     title: ['', []],

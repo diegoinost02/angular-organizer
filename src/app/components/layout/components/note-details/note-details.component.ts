@@ -8,6 +8,7 @@ import { NoteService } from '../../../../services/note.service';
 import { RequestStatus } from '../../../../interfaces/request-status.model';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { NoteDialogService } from '../../../../services/note-dialog.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-note-details',
@@ -17,15 +18,15 @@ import { NoteDialogService } from '../../../../services/note-dialog.service';
   styleUrl: './note-details.component.css'
 })
 export class NoteDetailsComponent implements OnDestroy{
-  
-  private dialogRef = inject(MatDialogRef);
-  protected noteData: Note = inject(MAT_DIALOG_DATA);
 
+  protected noteData: Note = inject(MAT_DIALOG_DATA);
+  private dialogRef = inject(MatDialogRef);
+  private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private noteService = inject(NoteService);
   private noteDialogService = inject(NoteDialogService);
 
-  userNotes$ = this.noteService.userNotes$;
+  userNotes$ = this.userService.userNotes$;
 
   statusSaveNote: RequestStatus = 'init';
   statusDeleteNote: RequestStatus = 'init';
@@ -79,13 +80,12 @@ export class NoteDetailsComponent implements OnDestroy{
       }
     })
   }
-
+  
   deleteNote(id: number) {
     this.noteService.deleteNote(id).subscribe({
-      next: (note: Note) => {
+      next: (deletedNote: Note) => {
         this.userNotes$.update((notes) => {
-          notes.splice(notes.indexOf(note)-1, 1);
-          return notes
+          return notes.filter(note => note.id !== deletedNote.id); 
         });
         this.dialogRef.close();
         this.statusDeleteNote = 'success';

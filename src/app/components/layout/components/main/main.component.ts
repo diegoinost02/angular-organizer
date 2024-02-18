@@ -5,7 +5,6 @@ import { NotesComponent } from '../notes/notes.component';
 import { FooterComponent } from '../../../shared/footer/footer.component';
 import { UserService } from '../../../../services/user.service';
 import { CommonModule } from '@angular/common';
-import { FolderService } from '../../../../services/folder.service';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
 
@@ -19,17 +18,16 @@ import { Router } from '@angular/router';
 export class MainComponent{
 
   private userService = inject(UserService);
-  private folderService = inject(FolderService);
   private router = inject(Router)
 
   user$ = this.userService.user$;
-  userFolders$ = this.folderService.userFolders$;
-  folderSelected$ = this.folderService.folderSelected$;
+  userFolders$ = this.userService.userFolders$;
+  folderSelected$ = this.userService.folderSelected$;
 
   isOpenUserMenu: boolean = false;
 
   selectFolder(folder: Folder) {
-    this.folderService.folderSelected$.update(() => folder);
+    this.userService.folderSelected$.update(() => folder);
   }
 
   closedFolder = "/assets/svg/folder.svg";

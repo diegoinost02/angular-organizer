@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -28,7 +28,6 @@ export class RegisterComponent {
 
   private authDialog = inject(AuthDialogService);
   private dialogRef = inject(MatDialogRef);
-  public data = inject(MAT_DIALOG_DATA);
   private snackBar = inject(MatSnackBar);
 
   status: RequestStatus = 'init';

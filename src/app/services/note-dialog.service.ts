@@ -14,24 +14,18 @@ export class NoteDialogService {
   private _snackBar = inject(MatSnackBar);
 
   openNoteDetails(note: Note) {
-    const dialogRef = this.dialog.open(NoteDetailsComponent, {
+    this.dialog.open(NoteDetailsComponent, {
       data: note,
       height: 'auto', width: 'auto',
       backdropClass: "background-dialog"
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    })
   }
 
   openNoteForm() {
-    const dialogRef = this.dialog.open(NoteFormComponent, {
+    this.dialog.open(NoteFormComponent, {
       height: 'auto', width: 'auto',
       backdropClass: "background-dialog",
     });
-    dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
-    })
   }
 
   async openSnackBarWithPromise(message: string, actionMessage: string, action: () => boolean): Promise<boolean> {

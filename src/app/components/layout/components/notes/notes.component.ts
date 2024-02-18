@@ -3,6 +3,7 @@ import { Note } from '../../../../interfaces/note.model';
 import { NoteService } from '../../../../services/note.service';
 import { FolderService } from '../../../../services/folder.service';
 import { NoteDialogService } from '../../../../services/note-dialog.service';
+import { UserService } from '../../../../services/user.service';
 
 @Component({
   selector: 'app-notes',
@@ -14,17 +15,20 @@ import { NoteDialogService } from '../../../../services/note-dialog.service';
 
 export class NotesComponent{
 
-  private folderService = inject(FolderService)
+  private userService = inject(UserService);
   private noteService = inject(NoteService)
   private noteDialogService = inject(NoteDialogService)
 
-  folderSelected = this.folderService.folderSelected$;
-  userNotes$ = this.noteService.userNotes$;
+  folderSelected = this.userService.folderSelected$;
+  userNotes$ = this.userService.userNotes$;
 
   constructor() {
     effect(()=>{
-      this.noteService.getNotesByFolderIdAndStatus(this.folderSelected()!.id, true).subscribe();
+      this.getNotes();
     })
+  }
+  getNotes(){
+    this.noteService.getNotesByFolderIdAndStatus(this.folderSelected()!.id, true).subscribe();
   }
 
   openNote(note: Note) {

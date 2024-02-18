@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
@@ -26,7 +26,6 @@ export class LoginComponent {
 
   private authDialog = inject(AuthDialogService);
   private dialogRef = inject(MatDialogRef);
-  public data = inject(MAT_DIALOG_DATA);
   private snackBar = inject(MatSnackBar);
 
   status: RequestStatus = 'init';
@@ -56,27 +55,6 @@ export class LoginComponent {
       this.loginForm.markAllAsTouched();
     }
   }
-
-  // login(): void{
-  //   if(this.loginForm.valid) {
-  //     this.status = 'loading';
-  //     setTimeout(() => {
-  //       const { username, password } = this.loginForm.getRawValue();
-  //       this.authService.login(username, password).subscribe({
-  //         next: () => {
-  //           this.status = 'success';
-  //           this.router.navigate(['/home']);
-  //           this.dialogRef.close();
-  //         },
-  //         error: () => {
-  //           this.status = 'failed';
-  //         }
-  //       })
-  //     }, 2000);
-  //   } else {
-  //     this.loginForm.markAllAsTouched();
-  //   }
-  // }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {

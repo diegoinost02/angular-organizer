@@ -4,6 +4,7 @@ import { environment } from '../environments/environments';
 import { Note, CreateNoteDto } from '../interfaces/note.model';
 import { TokenService } from './token.service';
 import { tap } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +13,8 @@ export class NoteService {
 
   private http = inject(HttpClient);
   private tokenService = inject(TokenService);
+  private userService = inject(UserService);
 
-  userNotes$ = signal<Note[]>([])
   apiUrl: string = environment.API_URL;
 
   getNotes() {
@@ -40,7 +41,7 @@ export class NoteService {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).pipe(tap(notes => this.userNotes$.update(() => notes.slice().reverse())))
+    }).pipe(tap(notes => this.userService.userNotes$.update(() => notes.slice().reverse())))
   }
 
   getUserNotesByStatus(userId: number, status: boolean) {

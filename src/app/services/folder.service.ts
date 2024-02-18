@@ -4,6 +4,7 @@ import { environment } from '../environments/environments';
 import { Folder } from '../interfaces/folder.model';
 import { TokenService } from './token.service';
 import { tap } from 'rxjs';
+import { UserService } from './user.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,7 @@ export class FolderService {
 
   private http = inject(HttpClient);
   private tokenService = inject(TokenService);
-
-  userFolders$ = signal<Folder[]>([])
-  folderSelected$ = signal<Folder | null>(null)
+  private userService = inject(UserService);
 
   apiUrl: string = environment.API_URL;
 
@@ -33,8 +32,8 @@ export class FolderService {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).pipe(tap(folders => this.userFolders$.update(() => folders)),
-        tap(folders => this.folderSelected$.update(() => folders[0])))
+    }).pipe(tap(folders => this.userService.userFolders$.update(() => folders)),
+        tap(folders => this.userService.folderSelected$.update(() => folders[0])))
   }
 
   createFolder(folder: Folder) {
