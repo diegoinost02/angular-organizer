@@ -2,14 +2,14 @@
     <form [formGroup]="noteForm" (ngSubmit)="createNote()">
         <input
             formControlName="title"
-            class="title-edit"
+            class="input-title"
             type="text"
             maxlength="30"
             placeholder="Título"
             >
         <textarea
             formControlName="description"
-            class="description-edit"
+            class="input-description"
             type="text"
             maxlength="2000"
             placeholder="Descripción"

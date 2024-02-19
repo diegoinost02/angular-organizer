@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { AuthDialogService } from '../../../../services/auth-dialog.service';
+import { AuthDialogService } from '../../../../services/dialogs/auth-dialog.service';
 
 @Component({
   selector: 'app-header',

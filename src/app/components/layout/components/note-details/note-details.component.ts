@@ -7,7 +7,7 @@ import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angu
 import { NoteService } from '../../../../services/note.service';
 import { RequestStatus } from '../../../../interfaces/request-status.model';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { NoteDialogService } from '../../../../services/note-dialog.service';
+import { NoteDialogService } from '../../../../services/dialogs/note-dialog.service';
 import { UserService } from '../../../../services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { finalize } from 'rxjs';

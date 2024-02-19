@@ -1,7 +1,7 @@
 import { Component, DestroyRef, effect, inject } from '@angular/core';
 import { Note } from '../../../../interfaces/note.model';
 import { NoteService } from '../../../../services/note.service';
-import { NoteDialogService } from '../../../../services/note-dialog.service';
+import { NoteDialogService } from '../../../../services/dialogs/note-dialog.service';
 import { UserService } from '../../../../services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 

@@ -7,7 +7,7 @@ import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { RequestStatus } from '../../../../interfaces/request-status.model';
 import { CreateNoteDto, Note } from '../../../../interfaces/note.model';
-import { NoteDialogService } from '../../../../services/note-dialog.service';
+import { NoteDialogService } from '../../../../services/dialogs/note-dialog.service';
 import { UserService } from '../../../../services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
@@ -59,6 +59,7 @@ export class NoteFormComponent {
         folders: [{id: this.folderSelected$()!.id}],
         status: true
       };
+      
       this.noteService.createNote(note)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe({ 

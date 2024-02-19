@@ -4,7 +4,7 @@ import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {FormBuilder, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
 import {MatIconModule} from '@angular/material/icon';
-import { AuthDialogService } from '../../../services/auth-dialog.service';
+import { AuthDialogService } from '../../../services/dialogs/auth-dialog.service';
 import { CustomValidators } from '../../../utils/validators';
 import { RequestStatus } from '../../../interfaces/request-status.model';
 import { AuthService } from '../../../services/auth.service';
