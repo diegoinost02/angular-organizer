@@ -8,27 +8,41 @@ import { JwtPayload, jwtDecode } from 'jwt-decode';
 export class TokenService {
 
   saveToken(token: string) {
-    localStorage.setItem('token', token)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('token', token)
+    }
   }
   
   getToken() {
-    return localStorage.getItem('token')
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('token');
+    }
+    return null;
   }
 
   removeToken() {
-    localStorage.removeItem('token')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('token')
+    }
   }
 
   saveRefreshToken(refreshToken: string) {
-    localStorage.setItem('refreshToken', refreshToken)
+    if (typeof window !== 'undefined') {
+      localStorage.setItem('refreshToken', refreshToken)
+    }
   }
 
   getRefreshToken() {
-    return localStorage.getItem('refreshToken')
+    if (typeof window !== 'undefined') {
+      return localStorage.getItem('refreshToken')
+    }
+    return null;
   }
 
   removeRefreshToken() {
-    localStorage.removeItem('refreshToken')
+    if (typeof window !== 'undefined') {
+      localStorage.removeItem('refreshToken')
+    }
   }
   isValidToken() {
     const token = this.getToken()
