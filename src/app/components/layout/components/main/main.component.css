@@ -220,9 +220,9 @@ li:hover{
 
     cursor: pointer;
     color: white;
-    background-color: rgb(41, 41, 41);
 }
 .btn-folders{
+    background-color: rgb(41, 41, 41);
     opacity: .8;
 }
 .btn-folders:hover{
@@ -231,15 +231,20 @@ li:hover{
     opacity: .9;
 }
 .end-actions{
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     width: 100%;
 }
 
 .ancor-actions{
+    width: fit-content;
+    font-size: 13px;
     /* background-color: rgba(57, 63, 184, 0.782); */
-    opacity: .75;
-    padding: 8px 10px;
+    background-color: transparent;
+    opacity: .6;
+    padding: 0px;
     box-sizing: border-box;
-    width: 100%;
 }
 .ancor-actions:hover{
     opacity: .9;

@@ -33,6 +33,7 @@ mat-label{
     color: white;
 }
 button {
+    height: 50px;
     cursor: pointer;
     border: none;
 }
