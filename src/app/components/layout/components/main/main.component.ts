@@ -20,7 +20,7 @@ export class MainComponent{
 
   private userService = inject(UserService);
   private router = inject(Router);
-  private folderDialog = inject(FolderDialogService);
+  private folderDialogService = inject(FolderDialogService);
 
   user$ = this.userService.user$;
   userFolders$ = this.userService.userFolders$;
@@ -28,16 +28,25 @@ export class MainComponent{
 
   isOpenUserMenu: boolean = false;
 
+  folderToOpenOverlay: Number = -1;
+  openFolderMenu(folderId: number) {
+    this.folderToOpenOverlay = folderId;
+  }
+
   selectFolder(folder: Folder) {
     this.userService.folderSelected$.update(() => folder);
   }
 
   closedFolder = "/assets/svg/folder.svg";
   openedFolder = "/assets/svg/opened-folder.svg";
-  currentFolder: number = -1;
+  currentFolder: number | null = null;
 
   createFolder(){
-    this.folderDialog.openFolderForm(); 
+    this.folderDialogService.openFolderForm(); 
+  }
+
+  openFolder(folder: Folder) {
+    this.folderDialogService.openFolderDetails(folder);
   }
   
   singOff(){

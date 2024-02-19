@@ -52,7 +52,7 @@ export class NoteDetailsComponent implements OnDestroy{
     }
   }
   saveChanges(): void {
-    if(this.noteForm.value !== this.noteData) {
+    if(this.noteForm.valid && this.noteForm.value !== this.noteData && this.noteForm.dirty) {
       this.statusSaveNote = 'loading';
       const { title, description } = this.noteForm.getRawValue();
       this.noteService.updateNote({ ...this.noteData, title, description })
@@ -74,6 +74,8 @@ export class NoteDetailsComponent implements OnDestroy{
           this.noteDialogService.openSnackBar('No se pudieron guardar los cambios', 'Cerrar');
         }
       })
+    } else {
+      this.noteDialogService.openSnackBar('Cambios guardados con éxito', 'Cerrar');
     }
   }
   

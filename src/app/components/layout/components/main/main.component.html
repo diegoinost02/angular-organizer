@@ -13,7 +13,7 @@
                     </a>
                     <div class="menu-user">
                         <button class="btn-menu">
-                            <img class="svg img-menu" src="/assets/svg/menu.svg" alt="menu" [ngClass]="{'selected-menu-user' : isOpenUserMenu === true}">
+                            <img class="svg img-menu" src="/assets/svg/menu.svg" alt="menu" [ngClass]="{'selected-menu' : isOpenUserMenu === true}">
                         </button>
                         <ng-template
                             cdkConnectedOverlay
@@ -38,14 +38,31 @@
                 @for (folder of userFolders$(); track $index) {
                     <li class="side-li folder-container">
                         <a class="ancor-folder"
+                        #folderMenuOverlay
                         (click)="selectFolder(folder)"
                         (mouseenter)="currentFolder = $index" (mouseleave)="currentFolder = -1">
                             <img class="svg" [src]="(currentFolder === $index || folderSelected$()?.id === folder.id) ? openedFolder : closedFolder" alt="folder">
                             {{ folder.name }}
                         </a>
-                        <div class="menu-folders">
-                            <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
-                        </div>
+                        <button
+                            class="btn-menu menu-folders"
+                            (click)="openFolderMenu(folder.id)"
+                            >
+                            <img class="img-menu" src="/assets/svg/menu.svg" alt="menu" [ngClass]="{'selected-menu' : folder.id === folderToOpenOverlay}">
+                        </button>
+                        <ng-template
+                            cdkConnectedOverlay
+                            [cdkConnectedOverlayOrigin]="folderMenuOverlay"
+                            [cdkConnectedOverlayOpen]="folder.id === folderToOpenOverlay"
+                            [cdkConnectedOverlayHasBackdrop]="true"
+                            (overlayOutsideClick)="openFolderMenu(-1)">
+                            <ul class="overlay">
+                                <p>
+                                    <span class="username-overlay">{{folder.name}}</span>
+                                </p>
+                                <li><a class="ancor-overlay" (click)="openFolder(folder)">Editar</a></li>
+                            </ul>
+                        </ng-template>
                     </li>
                 }
             </ul>

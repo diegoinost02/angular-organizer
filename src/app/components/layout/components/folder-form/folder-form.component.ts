@@ -28,6 +28,7 @@ export class FolderFormComponent {
 
   user$ = this.userService.user$;
   userFolders$ = this.userService.userFolders$;
+  folderSelected$ = this.userService.folderSelected$;
 
   folderForm = this.formBuilder.nonNullable.group({
     name: ['', [Validators.required, Validators.maxLength(50)]]
@@ -48,12 +49,13 @@ export class FolderFormComponent {
       .subscribe({
         next: (folder: Folder) => {
           this.userFolders$.update(folders => {
+            this.folderSelected$.update(() => folder);
               folders.unshift(folder);
               return folders
           })
           this.dialogRef.close();
           this.statusCreateFolder = 'success';
-          this.folderDialogService.openSnackBar('Nota creada con éxito', 'Cerrar');
+          this.folderDialogService.openSnackBar('Carpeta creada con éxito', 'Cerrar');
         },
         error: () => {
           this.statusCreateFolder = 'failed';
@@ -61,7 +63,7 @@ export class FolderFormComponent {
         }
       })
     } else {
-      this.folderDialogService.openSnackBar('La nota no es valida', 'Cerrar');
+      this.folderDialogService.openSnackBar('La carpeta no es valida', 'Cerrar');
     }
   }
 }

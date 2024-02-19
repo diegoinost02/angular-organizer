@@ -61,17 +61,14 @@ ul{
 .folders-container{
     padding-bottom: 0px;
 }
-.menu-user{
-    .btn-menu{
-        width: 100%;
-        height: 100%;
-        cursor: pointer;
-        background-color: transparent;
-        border: none;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
+.btn-menu{
+    height: 100%;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .overlay{
     display: flex;
@@ -180,12 +177,8 @@ li:hover{
 .svg {
     height: 18px;
 }
-.menu-folders{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
-.menu-folders, .btn-menu{
+
+.btn-menu{
     padding: 8px 10px;
 }
 .img-menu, .selected-menu-user{
@@ -194,7 +187,7 @@ li:hover{
 }
 .menu-folders:hover {
     .img-menu{
-        transform: rotate(-90deg);
+        transform: rotate(90deg);
     }
 }
 .profile:hover{
@@ -202,7 +195,7 @@ li:hover{
         transform: rotate(90deg);
     }
 }
-.selected-menu-user{
+.selected-menu{
     transform: rotate(90deg);
 }
 .action{

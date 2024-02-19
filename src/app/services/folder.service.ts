@@ -47,7 +47,7 @@ export class FolderService {
 
   updateFolder(folder: Folder) {
     const token = this.tokenService.getToken();
-    return this.http.put<Folder>(`${this.apiUrl}/api/folders/update/${folder.id}`, {folder}, {
+    return this.http.put<Folder>(`${this.apiUrl}/api/folders/update/${folder.id}`, folder, {
       headers: {
         Authorization: `Bearer ${token}`
       }

@@ -1,6 +1,6 @@
 <mat-dialog-content>
     <h3>Carpeta</h3>
-    <form [formGroup]="folderForm" (ngSubmit)="createFolder()">
+    <form [formGroup]="folderForm" (ngSubmit)="saveChanges()">
         <input
             formControlName="name"
             class="input-name"
@@ -16,8 +16,12 @@
         <img class="svg" src="/assets/svg/close.svg" alt="close">
     </button>
 
-    <button type="submit" id="edit-btn" mat-button (click)="createFolder()" matTooltip="Crear">
+    <button type="submit" id="edit-btn" mat-button (click)="saveChanges()" matTooltip="Guardar">
         <img class="svg" src="/assets/svg/save.svg" alt="save">
+    </button>
+
+    <button id="delete-btn" mat-button (click)="deleteFolder(folderData.id)" matTooltip="Eliminar">
+        <img class="svg" src="/assets/svg/trash.svg" alt="delete">
     </button>
     
 </mat-dialog-actions>
