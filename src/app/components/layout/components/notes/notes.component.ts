@@ -27,10 +27,16 @@ export class NotesComponent{
       this.getNotes();
     })
   }
+
+  isEmpty(): boolean{
+    if(this.userNotes$().length === 0) {
+      return true;
+    }
+    return false;
+  }
   getNotes(){
     this.noteService.getNotesByFolderIdAndStatus(this.folderSelected()!.id, true).subscribe();
   }
-
   openNote(note: Note) {
     this.noteDialogService.openNoteDetails(note);
   }

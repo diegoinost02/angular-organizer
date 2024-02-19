@@ -38,6 +38,30 @@ h1{
         color: #c7c7c7;
     }
 }
+.folder-empty-container{
+    background-color: rgb(34, 34, 34);
+    height: calc(100vh - 180px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    opacity: .7;
+    padding: 40px;
+    border-radius: 10px;
+    margin-top: 30px;
+
+    p{
+        color: #c7c7c7;
+        font-size: 20px;
+        margin: 0;
+    }
+}
+.folder-empty-container:hover{
+    opacity: .8;
+}
+.svg-folder-empty{
+    height: 500px;
+}
 .note-card:hover{
     border: .5px solid #5a5a5a;
 }
@@ -47,7 +71,6 @@ header{
     justify-content: space-between;
 }
 button{
-    background-color: transparent;
     border: none;
     cursor: pointer;
 }

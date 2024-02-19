@@ -6,6 +6,12 @@
             <img class="add-note-svg" src="/assets/svg/add-note.svg" alt="add">
         </button>
     </header>
+    @if(isEmpty()){
+        <button class="folder-empty-container" (click)="createNote()">
+            <img class="svg-folder-empty" src="/assets/svg/no-notes.svg" alt="folder-empty">
+            <p>La carpeta esta vacia</p>
+        </button>
+    }
     <div class="notes-container">
         @for (note of userNotes$(); track $index) {
             <div class="note-card" (click)="openNote(note)">
