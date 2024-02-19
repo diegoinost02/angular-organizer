@@ -18,7 +18,7 @@ export class NotesComponent{
   private noteService = inject(NoteService)
   private noteDialogService = inject(NoteDialogService)
 
-  folderSelected = this.userService.folderSelected$;
+  folderSelected$ = this.userService.folderSelected$;
   userNotes$ = this.userService.userNotes$;
 
   constructor() {
@@ -34,7 +34,11 @@ export class NotesComponent{
     return false;
   }
   getNotes(){
-    this.noteService.getNotesByFolderIdAndStatus(this.folderSelected()!.id, true).subscribe();
+    // this.noteService.getNotesByFolderIdAndStatus(this.folderSelected$()!.id, true).subscribe();
+    this.noteService.getNotesByFolderIdAndStatus(
+      this.folderSelected$() ? this.folderSelected$()!.id : 0,
+      true
+    ).subscribe();
   }
   openNote(note: Note) {
     this.noteDialogService.openNoteDetails(note);
