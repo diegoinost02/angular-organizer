@@ -3,7 +3,7 @@ import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/materia
 import { Note } from '../../../../interfaces/note.model';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NoteService } from '../../../../services/note.service';
 import { RequestStatus } from '../../../../interfaces/request-status.model';
 import {MatTooltipModule} from '@angular/material/tooltip';
@@ -32,7 +32,7 @@ export class NoteDetailsComponent implements OnDestroy{
   statusDeleteNote: RequestStatus = 'init';
 
   noteForm = this.formBuilder.nonNullable.group({
-    title: [this.noteData.title, []],
+    title: [this.noteData.title, [Validators.maxLength(30)]],
     description: [this.noteData.description, []]
   })
 
@@ -53,7 +53,8 @@ export class NoteDetailsComponent implements OnDestroy{
       this.noteService.updateNote({ ...this.noteData, title, description }).subscribe({
         next: (note: Note) => {
           this.userNotes$.update((notes) => {
-            notes.splice(notes.indexOf(note), 1, note);
+            notes.splice(notes.findIndex(n => n.id === note.id), 1, note);
+            // notes.splice(notes.indexOf(note), 1, note);
             return notes
           }
           );

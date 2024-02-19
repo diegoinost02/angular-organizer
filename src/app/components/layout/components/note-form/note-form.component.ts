@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { FormBuilder, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NoteService } from '../../../../services/note.service';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -30,8 +30,8 @@ export class NoteFormComponent {
   folderSelected$ = this.userService.folderSelected$;
 
   noteForm = this.formBuilder.nonNullable.group({
-    title: ['', []],
-    description: ['', []]
+    title: ['', [Validators.required, Validators.maxLength(30)]],
+    description: ['', [Validators.required, Validators.maxLength(2000)]]
   })
 
   statusCreateNote: RequestStatus = 'init'
@@ -47,28 +47,32 @@ export class NoteFormComponent {
   }
 
   createNote(): void {
-    const { title, description } = this.noteForm.getRawValue();
-    const note: CreateNoteDto = {
-      title: title,
-      description: description,
-      user: this.user$()!,
-      folders: [{id: this.folderSelected$()!.id}],
-      status: true
-    };
-    this.noteService.createNote(note).subscribe({ 
-      next: (note: Note) => {
-        this.userNotes$.update((notes) => { 
-          notes.unshift(note);
-          return notes
-        })
-        this.dialogRef.close();
-        this.statusCreateNote = 'success';
-        this.noteDialogService.openSnackBar('Nota creada con éxito', 'Cerrar');
-      },
-      error: () => {
-        this.statusCreateNote = 'failed';
-        this.noteDialogService.openSnackBar('No se pudo crear la nota', 'Cerrar');
-      }
-    })
+    if(this.noteForm.valid) {
+      const { title, description } = this.noteForm.getRawValue();
+      const note: CreateNoteDto = {
+        title: title,
+        description: description,
+        user: this.user$()!,
+        folders: [{id: this.folderSelected$()!.id}],
+        status: true
+      };
+      this.noteService.createNote(note).subscribe({ 
+        next: (note: Note) => {
+          this.userNotes$.update((notes) => { 
+            notes.unshift(note);
+            return notes
+          })
+          this.dialogRef.close();
+          this.statusCreateNote = 'success';
+          this.noteDialogService.openSnackBar('Nota creada con éxito', 'Cerrar');
+        },
+        error: () => {
+          this.statusCreateNote = 'failed';
+          this.noteDialogService.openSnackBar('No se pudo crear la nota', 'Cerrar');
+        }
+      })
+    } else {
+      this.noteDialogService.openSnackBar('La nota no es valida', 'Cerrar');
+    }
   }
 }

@@ -35,7 +35,7 @@ export class RegisterComponent {
   hideConfirmPassword = true;
 
   registerForm = this.formBuilder.nonNullable.group({
-    username: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.maxLength(20)]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required]],
     confirmPassword: ['', [Validators.required]]
@@ -73,16 +73,25 @@ export class RegisterComponent {
   }
 
   getEmailErrorMessage() {
-    if (this.registerForm.controls.email.hasError('required')) {
+    if(this.registerForm.controls.email.hasError('required')){
       return 'Debe ingresar un email';
     }
-    return this.registerForm.controls.email.hasError('email') ? 'El email no es valido' : '';
+    if(this.registerForm.controls.email.hasError('email')){
+      return 'El email no es valido';
+    }
+    return '';
   }
 
   getUsernameErrorMessage() {
-    return this.registerForm.controls.username.hasError('required') ? 'Debe ingresar un nombre de usuario' : '';
+    if(this.registerForm.controls.username.hasError('required')){
+      return 'Debe ingresar un nombre de usuario';
+    }
+    if(this.registerForm.controls.username.hasError('maxlength')){
+      return 'Máximo de 20 caracteres';
+    }
+    return '';
   }
-
+  
   getPasswordErrorMessage() {
     return this.registerForm.controls.password.hasError('required') ? 'Debe ingresar una contraseña' : '';
   }

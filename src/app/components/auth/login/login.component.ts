@@ -32,7 +32,7 @@ export class LoginComponent {
   hidePassword = true;
 
   loginForm = this.formBuilder.nonNullable.group({
-    username: ['', [Validators.required]],
+    username: ['', [Validators.required, Validators.maxLength(20)]],
     password: ['', [Validators.required]]
   })
 
@@ -63,7 +63,13 @@ export class LoginComponent {
   }
 
   getUsernameErrorMessage() {
-    return this.loginForm.controls.username.hasError('required') ? 'Debe ingresar un nombre de usuario' : '';
+    if(this.loginForm.controls.username.hasError('required')){
+      return 'Debe ingresar un nombre de usuario';
+    }
+    if(this.loginForm.controls.username.hasError('maxlength')){
+      return 'Máximo de 20 caracteres';
+    }
+    return '';
   }
 
   getPasswordErrorMessage() {
