@@ -1,32 +1,22 @@
 import { DestroyRef, Injectable, inject } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Note } from '../interfaces/note.model';
 import { MatDialog } from '@angular/material/dialog';
-import { NoteDetailsComponent } from '../components/layout/components/note-details/note-details.component';
-import { NoteFormComponent } from '../components/layout/components/note-form/note-form.component';
+import { FolderFormComponent } from '../../components/layout/components/folder-form/folder-form.component';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Injectable({
   providedIn: 'root'
 })
-export class NoteDialogService {
+export class FolderDialogService {
 
   private dialog = inject(MatDialog);
   private _snackBar = inject(MatSnackBar);
   private destroyRef = inject(DestroyRef);
 
-  openNoteDetails(note: Note) {
-    this.dialog.open(NoteDetailsComponent, {
-      data: note,
+  openFolderForm() {
+    this.dialog.open(FolderFormComponent, {
       height: 'auto', width: 'auto',
       backdropClass: "background-dialog"
-    });
-  }
-
-  openNoteForm() {
-    this.dialog.open(NoteFormComponent, {
-      height: 'auto', width: 'auto',
-      backdropClass: "background-dialog",
     });
   }
 
@@ -41,7 +31,7 @@ export class NoteDialogService {
       });
     });
   }
-  
+
   saveChangesOnDestroy(): boolean {
     return true
   }

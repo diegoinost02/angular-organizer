@@ -7,6 +7,7 @@ import { UserService } from '../../../../services/user.service';
 import { CommonModule } from '@angular/common';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { Router } from '@angular/router';
+import { FolderDialogService } from '../../../../services/dialogs/folder-dialog.service';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +19,8 @@ import { Router } from '@angular/router';
 export class MainComponent{
 
   private userService = inject(UserService);
-  private router = inject(Router)
+  private router = inject(Router);
+  private folderDialog = inject(FolderDialogService);
 
   user$ = this.userService.user$;
   userFolders$ = this.userService.userFolders$;
@@ -33,6 +35,10 @@ export class MainComponent{
   closedFolder = "/assets/svg/folder.svg";
   openedFolder = "/assets/svg/opened-folder.svg";
   currentFolder: number = -1;
+
+  createFolder(){
+    this.folderDialog.openFolderForm(); 
+  }
   
   singOff(){
     this.userService.logout();

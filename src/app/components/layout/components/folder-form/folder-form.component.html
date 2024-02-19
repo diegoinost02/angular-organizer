@@ -1,0 +1,23 @@
+<mat-dialog-content>
+    <h3>Carpeta</h3>
+    <form [formGroup]="folderForm" (ngSubmit)="createFolder()">
+        <input
+            formControlName="name"
+            class="input-name"
+            type="text"
+            maxlength="50"
+            placeholder="Ingrese un nombre"
+        >
+    </form>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+    <button id="close-btn" mat-button mat-dialog-close matTooltip="Cerrar">
+        <img class="svg" src="/assets/svg/close.svg" alt="close">
+    </button>
+
+    <button type="submit" id="edit-btn" mat-button (click)="createFolder()" matTooltip="Crear">
+        <img class="svg" src="/assets/svg/save.svg" alt="save">
+    </button>
+    
+</mat-dialog-actions>
