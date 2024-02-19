@@ -1,5 +1,7 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;1,100&display=swap');
+
 :root{
-    font-family: 'Rethink Sans', sans-serif;
+    font-family: 'Poppins', sans-serif;
     background-color: #151515;
 }
 

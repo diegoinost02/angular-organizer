@@ -68,6 +68,7 @@ h1{
 header{
     width: 100%;
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 button{
@@ -84,8 +85,13 @@ button{
     background-color: rgb(247, 174, 174);
     opacity: .9;
     border-radius: 10px;
-    padding: 2px 18px;
+    padding: 0px 18px;
+    height: 45px;
     gap: 2px;
+
+    p{
+        margin: 0;
+    }
 }
 .add-note-svg{
     height: 18px;

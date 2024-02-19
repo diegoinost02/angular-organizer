@@ -6,7 +6,9 @@ footer{
     width: 100%;
     padding-top: 40px;
     border-top: .5px solid #eaeaea43;
+    font-size: 15px;
 }
+
 div{
     width: 1200px;
 }
