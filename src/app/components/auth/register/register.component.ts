@@ -1,4 +1,4 @@
-import {Component, inject} from '@angular/core';
+import {Component, DestroyRef, inject} from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -11,6 +11,7 @@ import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-register',
@@ -24,10 +25,11 @@ export class RegisterComponent {
 
   private formBuilder = inject(FormBuilder);
   private authService = inject(AuthService);
-  private router = inject(Router)
+  private router = inject(Router);
 
   private authDialog = inject(AuthDialogService);
   private dialogRef = inject(MatDialogRef);
+  private destroyRef = inject(DestroyRef);
   private snackBar = inject(MatSnackBar);
 
   status: RequestStatus = 'init';
@@ -47,7 +49,9 @@ export class RegisterComponent {
     if (this.registerForm.valid) {
       this.status = 'loading'
       const { username, email, password } = this.registerForm.getRawValue();
-      this.authService.registerAndLogin(username, email, password).subscribe({
+      this.authService.registerAndLogin(username, email, password)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
         next: () =>{
           this.status = 'success';
           this.router.navigate([`/${username}`]);

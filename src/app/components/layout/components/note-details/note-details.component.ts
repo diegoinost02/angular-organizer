@@ -1,4 +1,4 @@
-import { Component, OnDestroy, inject } from '@angular/core';
+import { Component, DestroyRef, OnDestroy, inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { Note } from '../../../../interfaces/note.model';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,8 @@ import { RequestStatus } from '../../../../interfaces/request-status.model';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import { NoteDialogService } from '../../../../services/note-dialog.service';
 import { UserService } from '../../../../services/user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-note-details',
@@ -25,6 +27,8 @@ export class NoteDetailsComponent implements OnDestroy{
   private formBuilder = inject(FormBuilder);
   private noteService = inject(NoteService);
   private noteDialogService = inject(NoteDialogService);
+
+  private destroyRef = inject(DestroyRef);
 
   userNotes$ = this.userService.userNotes$;
 
@@ -46,11 +50,13 @@ export class NoteDetailsComponent implements OnDestroy{
       }
     }
   }
-  
   saveChanges(): void {
     if(this.noteForm.value !== this.noteData) {
       const { title, description } = this.noteForm.getRawValue();
-      this.noteService.updateNote({ ...this.noteData, title, description }).subscribe({
+      this.noteService.updateNote({ ...this.noteData, title, description })
+      // .pipe(takeUntilDestroyed(this.destroyRef))
+      .pipe(finalize(() => takeUntilDestroyed(this.destroyRef)))
+      .subscribe({
         next: (note: Note) => {
           this.userNotes$.update((notes) => {
             notes.splice(notes.findIndex(n => n.id === note.id), 1, note);
@@ -70,7 +76,9 @@ export class NoteDetailsComponent implements OnDestroy{
   }
   
   archiveNote(id: number): void {
-    this.noteService.archiveNoteById(id).subscribe({
+    this.noteService.archiveNoteById(id)
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe({
       next: () => {
         this.statusDeleteNote = 'success';
         this.noteDialogService.openSnackBar('Nota archivada con éxito', 'Cerrar');
@@ -83,7 +91,9 @@ export class NoteDetailsComponent implements OnDestroy{
   }
   
   deleteNote(id: number) {
-    this.noteService.deleteNote(id).subscribe({
+    this.noteService.deleteNote(id)
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe({
       next: (deletedNote: Note) => {
         this.userNotes$.update((notes) => {
           return notes.filter(note => note.id !== deletedNote.id); 

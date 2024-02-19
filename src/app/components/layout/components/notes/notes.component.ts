@@ -1,8 +1,9 @@
-import { Component, effect, inject } from '@angular/core';
+import { Component, DestroyRef, effect, inject } from '@angular/core';
 import { Note } from '../../../../interfaces/note.model';
 import { NoteService } from '../../../../services/note.service';
 import { NoteDialogService } from '../../../../services/note-dialog.service';
 import { UserService } from '../../../../services/user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-notes',
@@ -15,8 +16,9 @@ import { UserService } from '../../../../services/user.service';
 export class NotesComponent{
 
   private userService = inject(UserService);
-  private noteService = inject(NoteService)
-  private noteDialogService = inject(NoteDialogService)
+  private noteService = inject(NoteService);
+  private noteDialogService = inject(NoteDialogService);
+  private destroyRef = inject(DestroyRef);
 
   folderSelected$ = this.userService.folderSelected$;
   userNotes$ = this.userService.userNotes$;
@@ -37,8 +39,9 @@ export class NotesComponent{
     // this.noteService.getNotesByFolderIdAndStatus(this.folderSelected$()!.id, true).subscribe();
     this.noteService.getNotesByFolderIdAndStatus(
       this.folderSelected$() ? this.folderSelected$()!.id : 0,
-      true
-    ).subscribe();
+      true)
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe();
   }
   openNote(note: Note) {
     this.noteDialogService.openNoteDetails(note);

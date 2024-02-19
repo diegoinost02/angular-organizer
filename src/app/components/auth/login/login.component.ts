@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import {MatInputModule} from '@angular/material/input';
 import {MatFormFieldModule} from '@angular/material/form-field';
@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 import { AuthService } from '../../../services/auth.service';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,7 @@ export class LoginComponent {
 
   private authDialog = inject(AuthDialogService);
   private dialogRef = inject(MatDialogRef);
+  private destroyRef = inject(DestroyRef);
   private snackBar = inject(MatSnackBar);
 
   status: RequestStatus = 'init';
@@ -40,7 +42,9 @@ export class LoginComponent {
     if(this.loginForm.valid) {
       this.status = 'loading';
       const { username, password } = this.loginForm.getRawValue();
-      this.authService.login(username, password).subscribe({
+      this.authService.login(username, password)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
         next: () => {
           this.status = 'success';
           this.router.navigate([`/${username}`]);

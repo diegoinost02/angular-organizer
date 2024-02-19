@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, DestroyRef, inject } from '@angular/core';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NoteService } from '../../../../services/note.service';
 import { MatButtonModule } from '@angular/material/button';
@@ -9,6 +9,7 @@ import { RequestStatus } from '../../../../interfaces/request-status.model';
 import { CreateNoteDto, Note } from '../../../../interfaces/note.model';
 import { NoteDialogService } from '../../../../services/note-dialog.service';
 import { UserService } from '../../../../services/user.service';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-note-form',
@@ -28,6 +29,8 @@ export class NoteFormComponent {
   user$ = this.userService.user$;
   userNotes$ = this.userService.userNotes$;
   folderSelected$ = this.userService.folderSelected$;
+
+  private destroyRef = inject(DestroyRef);
 
   noteForm = this.formBuilder.nonNullable.group({
     title: ['', [Validators.required, Validators.maxLength(30)]],
@@ -56,7 +59,9 @@ export class NoteFormComponent {
         folders: [{id: this.folderSelected$()!.id}],
         status: true
       };
-      this.noteService.createNote(note).subscribe({ 
+      this.noteService.createNote(note)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({ 
         next: (note: Note) => {
           this.userNotes$.update((notes) => { 
             notes.unshift(note);
