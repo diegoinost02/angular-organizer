@@ -53,7 +53,7 @@ export class NoteDetailsComponent implements OnDestroy{
       this.noteService.updateNote({ ...this.noteData, title, description }).subscribe({
         next: (note: Note) => {
           this.userNotes$.update((notes) => {
-            notes[note.id-1] = note;
+            notes.splice(notes.indexOf(note), 1, note);
             return notes
           }
           );

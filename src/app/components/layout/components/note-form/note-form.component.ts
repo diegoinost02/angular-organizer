@@ -8,7 +8,6 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { RequestStatus } from '../../../../interfaces/request-status.model';
 import { CreateNoteDto, Note } from '../../../../interfaces/note.model';
 import { NoteDialogService } from '../../../../services/note-dialog.service';
-import { FolderService } from '../../../../services/folder.service';
 import { UserService } from '../../../../services/user.service';
 
 @Component({
