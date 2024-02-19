@@ -37,6 +37,7 @@ export class FolderFormComponent {
 
   createFolder(): void {
     if((this.folderForm.valid)){
+      this.statusCreateFolder = 'loading';
       const { name } = this.folderForm.getRawValue();
       const folder: CreateFolderDto = {
         name: name,

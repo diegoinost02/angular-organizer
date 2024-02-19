@@ -51,6 +51,7 @@ export class NoteFormComponent {
 
   createNote(): void {
     if(this.noteForm.valid) {
+      this.statusCreateNote = 'loading';
       const { title, description } = this.noteForm.getRawValue();
       const note: CreateNoteDto = {
         title: title,

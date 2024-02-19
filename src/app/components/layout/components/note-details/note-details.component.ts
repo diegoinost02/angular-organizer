@@ -22,17 +22,18 @@ import { finalize } from 'rxjs';
 export class NoteDetailsComponent implements OnDestroy{
 
   protected noteData: Note = inject(MAT_DIALOG_DATA);
-  private dialogRef = inject(MatDialogRef);
   private userService = inject(UserService);
   private formBuilder = inject(FormBuilder);
   private noteService = inject(NoteService);
   private noteDialogService = inject(NoteDialogService);
 
+  private dialogRef = inject(MatDialogRef);
   private destroyRef = inject(DestroyRef);
 
   userNotes$ = this.userService.userNotes$;
 
   statusSaveNote: RequestStatus = 'init';
+  statusArchiveNote: RequestStatus = 'init';
   statusDeleteNote: RequestStatus = 'init';
 
   noteForm = this.formBuilder.nonNullable.group({
@@ -52,6 +53,7 @@ export class NoteDetailsComponent implements OnDestroy{
   }
   saveChanges(): void {
     if(this.noteForm.value !== this.noteData) {
+      this.statusSaveNote = 'loading';
       const { title, description } = this.noteForm.getRawValue();
       this.noteService.updateNote({ ...this.noteData, title, description })
       // .pipe(takeUntilDestroyed(this.destroyRef))
@@ -76,21 +78,23 @@ export class NoteDetailsComponent implements OnDestroy{
   }
   
   archiveNote(id: number): void {
+    this.statusArchiveNote = 'loading';
     this.noteService.archiveNoteById(id)
     .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe({
       next: () => {
-        this.statusDeleteNote = 'success';
+        this.statusArchiveNote = 'success';
         this.noteDialogService.openSnackBar('Nota archivada con éxito', 'Cerrar');
       },
       error: () => {
-        this.statusDeleteNote = 'failed';
+        this.statusArchiveNote = 'failed';
         this.noteDialogService.openSnackBar('No se pudo archivar la nota', 'Cerrar');
       }
     })
   }
   
-  deleteNote(id: number) {
+  deleteNote(id: number): void {
+    this.statusDeleteNote = 'loading';
     this.noteService.deleteNote(id)
     .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe({

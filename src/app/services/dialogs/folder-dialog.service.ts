@@ -3,6 +3,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { FolderFormComponent } from '../../components/layout/components/folder-form/folder-form.component';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FolderDetailsComponent } from '../../components/layout/components/folder-details/folder-details.component';
+import { Folder } from '../../interfaces/folder.model';
 
 @Injectable({
   providedIn: 'root'
@@ -13,6 +15,13 @@ export class FolderDialogService {
   private _snackBar = inject(MatSnackBar);
   private destroyRef = inject(DestroyRef);
 
+  openFolderDetails(folder: Folder) {
+    this.dialog.open(FolderDetailsComponent, {
+      data: folder,
+      height: 'auto', width: 'auto',
+      backdropClass: "background-dialog"
+    });
+  }
   openFolderForm() {
     this.dialog.open(FolderFormComponent, {
       height: 'auto', width: 'auto',
