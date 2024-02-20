@@ -15,4 +15,7 @@ export class HeaderComponent {
   openRegister(): void {
     this.authDialog.openRegister();
   }
+  openLogin(): void {
+    this.authDialog.openLogin();
+  }
 }
