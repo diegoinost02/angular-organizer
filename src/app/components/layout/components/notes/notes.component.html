@@ -1,6 +1,12 @@
 <section>
     <header>
-        <h1> {{folderSelected$() ? folderSelected$()?.name : 'No tienes carpetas aún'}} </h1>
+        @if(folderSelected$()) {
+            <h1 class="folder-name" (click)="openFolder(folderSelected$()!)">
+                {{folderSelected$()?.name}}
+            </h1>
+        } @else if(isEmpty()) {
+            <h1> No tienes carpetas aún </h1>
+        }
         <button class="add-note" (click)="!folderSelected$() ? createFolder() : createNote()">
             <p> {{ !folderSelected$() ? 'Crear carpeta': 'Crear nota'}} </p>
             <img class="add-note-svg" src="/assets/svg/add-note.svg" alt="add">

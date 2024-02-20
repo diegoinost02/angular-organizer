@@ -62,6 +62,9 @@ export class FolderDetailsComponent implements OnDestroy{
               folders.splice(folders.findIndex(f => f.id === folder.id), 1, folder);
               return folders
           })
+          if (this.folderSelected$()!.id === folder.id){
+            this.folderSelected$.update(() => folder);
+          }
           this.statusSaveFolder = 'success';
           this.folderDialogService.openSnackBar('Cambios guardados con éxito', 'Cerrar');
         },

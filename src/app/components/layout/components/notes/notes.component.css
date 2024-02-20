@@ -10,8 +10,13 @@ section{
 h1{
     font-size: 40px;
     margin: 0;
-    padding: 0;
+    padding: 0 3px;
     color: white;
+    opacity: .9;
+}
+.folder-name:hover{
+    cursor: pointer;
+    opacity: 1;
 }
 .notes-container{
     display: grid;

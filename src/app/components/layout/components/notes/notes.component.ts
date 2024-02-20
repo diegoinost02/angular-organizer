@@ -5,6 +5,7 @@ import { NoteDialogService } from '../../../../services/dialogs/note-dialog.serv
 import { UserService } from '../../../../services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FolderDialogService } from '../../../../services/dialogs/folder-dialog.service';
+import { Folder } from '../../../../interfaces/folder.model';
 
 @Component({
   selector: 'app-notes',
@@ -37,6 +38,7 @@ export class NotesComponent{
     }
     return false;
   }
+
   getNotes(){
     // this.noteService.getNotesByFolderIdAndStatus(this.folderSelected$()!.id, true).subscribe();
     this.noteService.getNotesByFolderIdAndStatus(
@@ -45,12 +47,19 @@ export class NotesComponent{
     .pipe(takeUntilDestroyed(this.destroyRef))
     .subscribe();
   }
+
   openNote(note: Note) {
     this.noteDialogService.openNoteDetails(note);
   }
+
   createNote() {
     this.noteDialogService.openNoteForm();
   }
+
+  openFolder(folder: Folder) {
+    this.folderDialogService.openFolderDetails(folder);
+  }
+
   createFolder(){
     this.folderDialogService.openFolderForm(); 
   }
