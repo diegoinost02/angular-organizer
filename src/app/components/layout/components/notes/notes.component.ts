@@ -4,6 +4,7 @@ import { NoteService } from '../../../../services/note.service';
 import { NoteDialogService } from '../../../../services/dialogs/note-dialog.service';
 import { UserService } from '../../../../services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
+import { FolderDialogService } from '../../../../services/dialogs/folder-dialog.service';
 
 @Component({
   selector: 'app-notes',
@@ -18,6 +19,7 @@ export class NotesComponent{
   private userService = inject(UserService);
   private noteService = inject(NoteService);
   private noteDialogService = inject(NoteDialogService);
+  private folderDialogService = inject(FolderDialogService);
   private destroyRef = inject(DestroyRef);
 
   folderSelected$ = this.userService.folderSelected$;
@@ -48,6 +50,9 @@ export class NotesComponent{
   }
   createNote() {
     this.noteDialogService.openNoteForm();
+  }
+  createFolder(){
+    this.folderDialogService.openFolderForm(); 
   }
 
 }

@@ -1,17 +1,19 @@
 <section>
     <header>
-        <h1> {{folderSelected$()?.name}} </h1>
-        <button class="add-note" (click)="createNote()">
-            <p>Crear nota</p>
+        <h1> {{folderSelected$() ? folderSelected$()?.name : 'No tienes carpetas aún'}} </h1>
+        <button class="add-note" (click)="!folderSelected$() ? createFolder() : createNote()">
+            <p> {{ !folderSelected$() ? 'Crear carpeta': 'Crear nota'}} </p>
             <img class="add-note-svg" src="/assets/svg/add-note.svg" alt="add">
         </button>
     </header>
-    @if(isEmpty()){
-        <button class="folder-empty-container" (click)="createNote()">
+
+    @if(!folderSelected$() || isEmpty()) {
+        <button class="folder-empty-container" (click)="!folderSelected$() ? createFolder() : createNote()">
             <img class="svg-folder-empty" src="/assets/svg/no-notes.svg" alt="folder-empty">
-            <p>La carpeta esta vacia</p>
+            <p>{{ !folderSelected$() ? 'Crear carpeta' : 'La carpeta está vacía' }}</p>
         </button>
     }
+
     <div class="notes-container">
         @for (note of userNotes$(); track $index) {
             <div class="note-card" (click)="openNote(note)">

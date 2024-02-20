@@ -82,7 +82,7 @@ export class FolderDetailsComponent implements OnDestroy{
     .subscribe({
       next: (deletedFolder: Folder) => {
         this.userFolders$.update((folders) => {
-          this.folderSelected$.update(() => folders.find(folder => folder.id != deletedFolder.id) || folders[0]);
+          this.folderSelected$.update(() => folders.find(folder => folder.id != deletedFolder.id) || null);
           return folders.filter(folder => folder.id !== deletedFolder.id);
         });
         this.dialogRef.close();
