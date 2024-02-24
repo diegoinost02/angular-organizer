@@ -47,7 +47,9 @@ export class LayoutComponent implements OnInit{
 
   getFolders(userId: number): void {
     this.foldersRequestStatus.update(() => 'loading');
-    this.folderService.getUserFolders(userId).subscribe({
+    this.folderService.getUserFolders(userId)
+    .pipe(takeUntilDestroyed(this.destroyRef))
+    .subscribe({
       next: () => {
         this.foldersRequestStatus.update(() => 'success');
       },

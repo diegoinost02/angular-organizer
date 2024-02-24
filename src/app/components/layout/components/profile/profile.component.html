@@ -1,1 +1,41 @@
-<p>profile works!</p>
+<h2 mat-dialog-title>Cuenta</h2>
+<mat-dialog-content>
+    <div class="container">
+        <div class="user-detail">
+            <div class="description">
+                <p>Nombre de usuario</p>
+            </div>
+            <div class="value">
+                <p> {{user$()?.username}} </p>
+                <button class="edit-btn">
+                    <img class="svg" src="/assets/svg/edit.svg" alt="edit">
+                </button>
+            </div>
+        </div>
+        <div class="user-detail">
+            <div class="description">
+                <p>Correo electrónico</p>
+            </div>
+            <div class="value">
+                <p> {{user$()?.email}} </p>
+                <button class="edit-btn">
+                    <img class="svg" src="/assets/svg/edit.svg" alt="edit">
+                </button>
+            </div>
+        </div>
+        <button class="change-password-btn">
+            Cambiar contraseña
+        </button>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+    <div class="container">
+        <button class="action" id="delete-btn" mat-button>
+            Eliminar cuenta
+        </button>
+        <button class="action" id="close-btn" mat-button mat-dialog-close>
+            Cerrar
+        </button>
+    </div>
+</mat-dialog-actions>

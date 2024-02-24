@@ -79,6 +79,7 @@ header{
 button{
     border: none;
     cursor: pointer;
+    outline: none;
 }
 .add-note{
     display: flex;

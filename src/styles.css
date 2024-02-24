@@ -5,6 +5,7 @@
 }
 * {
     font-family: 'Poppins', sans-serif;
+    border-radius: border-box;
 }
 h1 ,h2, h3, h4, h5, h6{
     text-wrap:balance;
@@ -13,10 +14,9 @@ p{
     text-wrap: pretty;
 }
 
-
 .background-dialog {
-    background: rgba(0, 0, 0, 0.5);
-    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.611);
 }
+
 html, body { height: 100%; }
 body { margin: 0; }

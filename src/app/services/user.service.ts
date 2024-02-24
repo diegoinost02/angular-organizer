@@ -7,6 +7,7 @@ import { tap } from 'rxjs';
 import { Folder } from '../interfaces/folder.model';
 import { Note } from '../interfaces/note.model';
 import { RequestStatus } from '../interfaces/request-status.model';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ import { RequestStatus } from '../interfaces/request-status.model';
 export class UserService {
 
   private http = inject(HttpClient);
+  private router = inject(Router);
   private tokenService = inject(TokenService);
 
   user$ = signal<User | null>(null);
@@ -38,5 +40,6 @@ export class UserService {
   logout() {
     this.tokenService.removeRefreshToken();
     this.tokenService.removeToken();
+    this.router.navigate(['/']);
   }
 }

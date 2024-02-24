@@ -19,14 +19,13 @@
                             cdkConnectedOverlay
                             [cdkConnectedOverlayOrigin]="menuOverlay"
                             [cdkConnectedOverlayOpen]="isOpenUserMenu"
-                            [cdkConnectedOverlayHasBackdrop]="true"
                             (overlayOutsideClick)="isOpenUserMenu = !isOpenUserMenu">
                             <ul class="overlay">
                                 <p>
                                     <span class="username-overlay">{{user$()?.username}}</span>
                                     <span class="email-overlay">{{user$()?.email}} </span>
                                 </p>
-                                <li><a class="ancor-overlay">Cuenta</a></li>
+                                <li><a class="ancor-overlay" (click)="openProfile()">Cuenta</a></li>
                                 <li><a class="ancor-overlay" (click)="singOff()">Cerrar sesión</a></li>
                             </ul>
                         </ng-template>
