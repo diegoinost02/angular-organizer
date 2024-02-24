@@ -198,6 +198,9 @@ li:hover{
 .selected-menu{
     transform: rotate(90deg);
 }
+button:focus {
+    outline: none;
+}
 .action{
     display: flex;
     align-items: center;
@@ -241,4 +244,7 @@ li:hover{
 }
 .ancor-actions:hover{
     opacity: .9;
+}
+a{
+    text-decoration: none;
 }
