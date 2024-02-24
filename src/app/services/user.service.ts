@@ -6,19 +6,23 @@ import { TokenService } from './token.service';
 import { tap } from 'rxjs';
 import { Folder } from '../interfaces/folder.model';
 import { Note } from '../interfaces/note.model';
+import { RequestStatus } from '../interfaces/request-status.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private http = inject(HttpClient)
-  private tokenService = inject(TokenService)
+  private http = inject(HttpClient);
+  private tokenService = inject(TokenService);
 
-  user$ = signal<User | null>(null)
-  userFolders$ = signal<Folder[]>([])
-  folderSelected$ = signal<Folder | null>(null)
-  userNotes$ = signal<Note[]>([])
+  user$ = signal<User | null>(null);
+  userFolders$ = signal<Folder[]>([]);
+  folderSelected$ = signal<Folder | null>(null);
+  userNotes$ = signal<Note[]>([]);
+
+  userRequestStatus = signal<RequestStatus>('init');
+  foldersRequestStatus = signal<RequestStatus>('init');
 
   apiUrl: string = environment.API_URL;
 
@@ -28,7 +32,7 @@ export class UserService {
       headers: {
         Authorization: `Bearer ${token}`
       }
-    }).pipe(tap(user => this.user$.update(() => user)))
+    }).pipe(tap(user => this.user$.update(() => user)));
   }
 
   logout() {
