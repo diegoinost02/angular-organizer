@@ -1,0 +1,103 @@
+
+<h2 mat-dialog-title>
+    @if (valueToEdit() === 'username') {
+        Editar nombre de usuario
+    }
+    @else if (valueToEdit() === 'email') {
+        Editar email
+    }
+    @else if(valueToEdit() === 'password'){
+        Cambiar contraseña
+    }
+</h2>
+<section>
+    <form [formGroup]="userForm" (ngSubmit)="update()">
+        @if (valueToEdit() === 'username') {
+            <mat-form-field>
+                <mat-label>Nuevo nombre de usuario</mat-label>
+                <input
+                    formControlName="username"
+                    type="text"
+                    name="username"
+                    matInput
+                    maxlength="20"
+                    placeholder="Nombre de usuario"
+                    autocomplete="off"
+                    >
+                @if (userForm.controls.username.invalid) {
+                    <mat-error> {{getUsernameErrorMessage()}} </mat-error>
+                }
+            </mat-form-field>
+        }
+        @else if (valueToEdit() === 'email') {
+            <mat-form-field>
+                <mat-label>Nuevo email</mat-label>
+                <input
+                    formControlName="email"
+                    type="email"
+                    name="email"
+                    matInput
+                    maxlength="50"
+                    placeholder="Nombre email"
+                    autocomplete="off"
+                    >
+                @if (userForm.controls.email.invalid) {
+                    <mat-error> {{getEmailErrorMessage()}} </mat-error>
+                }
+            </mat-form-field>
+        }
+        @else if(valueToEdit() === 'password'){
+            <mat-form-field>
+            <mat-label>Nueva contraseña</mat-label>
+            <input
+                formControlName="newPassword"
+                [type]="hideNewPassword ? 'password' : 'text'"
+                name="newPassword"
+                matInput
+                placeholder="Nueva contraseña"
+                autocomplete="off"
+                >
+            @if (userForm.controls.newPassword.invalid) {
+                <mat-error> {{getNewPasswordErrorMessage()}} </mat-error>
+            }
+            <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hideNewPassword = !hideNewPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hideNewPassword"
+                class="button-view-password">
+                <mat-icon>{{hideNewPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+            </mat-form-field>
+        }
+        <mat-form-field>
+            <mat-label>Confirmar contraseña</mat-label>
+            <input
+                formControlName="password"
+                [type]="hidePassword ? 'password' : 'text'"
+                name="password"
+                matInput
+                placeholder="Contraseña actual"
+                autocomplete="off"
+                >
+            @if (userForm.controls.password.invalid) {
+                <mat-error> {{getNewPasswordErrorMessage()}} </mat-error>
+            }
+            <button
+                mat-icon-button
+                matSuffix
+                type="button"
+                (click)="hidePassword = !hidePassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hidePassword"
+                class="button-view-password">
+                <mat-icon>{{hidePassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+            </button>
+        </mat-form-field>
+        <button class="button-submit" type="submit" (click)="update()">
+            @if (status==='loading') {
+                <mat-spinner color="accent" [diameter]="15"></mat-spinner>
+            } @else {
+                Actualizar
+            }
+        </button>
+    </form>
+</section>

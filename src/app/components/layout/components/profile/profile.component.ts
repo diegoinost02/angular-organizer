@@ -3,6 +3,7 @@ import { UserService } from '../../../../services/user.service';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltip } from '@angular/material/tooltip';
+import { UserDialogService } from '../../../../services/dialogs/user-dialog.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,10 +14,29 @@ import { MatTooltip } from '@angular/material/tooltip';
 })
 export class ProfileComponent {
 
+  private userDialogService = inject(UserDialogService);
   private userService = inject(UserService);
   user$ = this.userService.user$;
 
-  editUsername() {}
+  editUsername() {
+    this.userService.valueToEdit.update(() => 'username');
+    this.openEdit();
+  }
 
-  changePassword() {}
+  editEmail() {
+    this.userService.valueToEdit.update(() => 'email');
+    this.openEdit();}
+
+  changePassword() {
+    this.userService.valueToEdit.update(() => 'password');
+    this.openEdit();
+  }
+
+  openEdit(){
+    if(this.user$()!.id) {
+      this.userDialogService.openEditUser(this.user$()!.id);
+    }
+  }
+
+  deleteAccount() {}
 }

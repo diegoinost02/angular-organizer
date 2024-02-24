@@ -7,7 +7,7 @@
             </div>
             <div class="value">
                 <p> {{user$()?.username}} </p>
-                <button class="edit-btn">
+                <button class="edit-btn" (click)="editUsername()">
                     <img class="svg" src="/assets/svg/edit.svg" alt="edit">
                 </button>
             </div>
@@ -18,12 +18,12 @@
             </div>
             <div class="value">
                 <p> {{user$()?.email}} </p>
-                <button class="edit-btn">
+                <button class="edit-btn" (click)="editEmail()">
                     <img class="svg" src="/assets/svg/edit.svg" alt="edit">
                 </button>
             </div>
         </div>
-        <button class="change-password-btn">
+        <button class="change-password-btn" (click)="changePassword()">
             Cambiar contraseña
         </button>
     </div>

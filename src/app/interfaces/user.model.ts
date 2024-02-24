@@ -11,3 +11,7 @@ export interface User {
     roles: Role[];
     enabled: boolean;
 }
+export interface UpdateUserDto extends Omit<User, 'folders' | 'notes' | 'roles' | 'enabled'>{
+    password: string;
+    newPassword: string | null;
+}

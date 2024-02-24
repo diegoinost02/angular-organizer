@@ -17,6 +17,10 @@ p{
 .background-dialog {
     background: rgba(0, 0, 0, 0.611);
 }
+.background-dialog-blur {
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.611);
+}
 
 html, body { height: 100%; }
 body { margin: 0; }

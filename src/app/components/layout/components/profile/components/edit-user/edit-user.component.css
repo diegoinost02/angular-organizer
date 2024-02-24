@@ -1,0 +1,40 @@
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 50px 0;
+    background-color: #252525;
+}
+
+mat-form-field {
+    margin: 0 30px;
+    height: 75px;
+    width: 400px;
+    border: non;
+    margin-bottom: 8px;
+}
+mat-label{
+    color: white;
+}
+
+button {
+    height: 50px;
+    cursor: pointer;
+    border: none;
+}
+.button-submit{
+    color: white;
+    padding: 15px 0;
+    background-color: #c2175b;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.button-view-password{
+    margin-right: 5px;
+    background-color: transparent;
+    color: white;
+}

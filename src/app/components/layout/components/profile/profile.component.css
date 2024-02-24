@@ -91,6 +91,7 @@ mat-dialog-actions{
 }
 
 .action{
+    text-align: center;
     opacity: .7;
 }
 .action:hover{
