@@ -12,6 +12,42 @@ header{
     justify-content: center;
     width: 1200px;
 }
+@media(width<=1200px){
+    .header-container{
+        width: 90%;
+
+        h1{
+            font-size: 45px;
+        }
+        .img{
+            width: 100%;
+            align-items: center;
+            
+            .image-app{
+                width: 100%;
+                max-height: 580px;
+            }
+        }
+    }
+}
+@media(width<=1000px){
+    .header-container{
+        grid-template-columns: repeat(1, 1fr);
+        gap: 30px;
+
+        .get-started-button{
+            margin-top: 10px;
+        }
+    }
+}
+
+@media(width<=374px){
+    .header-container{
+        h1{
+            font-size: calc(40px - 2vw);
+        }
+    }
+}
 
 div{
     display: flex;
@@ -33,11 +69,12 @@ p{
 .img{
     display: flex;
     align-items: end;
+    width: fit-content;
 }
 .image-app{
     border-radius: 15px;
-    width: 520px;
-    height: 390px;
+    width: 100%;
+    max-width: 900px;
     object-fit: cover;
 }
 .get-started-button{

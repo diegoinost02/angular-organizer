@@ -9,10 +9,34 @@ footer{
     font-size: 15px;
 }
 
-div{
+.title-container{
     width: 1200px;
 }
-.container{
+@media(width<=1200px){
+    footer{
+        .title-container, .info-container{
+            width: 90%;
+        }
+    }
+}
+@media(width<=600px){
+    footer{
+        padding-top: 30px;
+        .title-container{
+            margin-bottom: 10px;
+        }
+        .title-container, .info-container{
+            width: fit-content;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        ul{
+            padding-left: 0;
+        }
+    }
+}
+.info-container{
     display: flex;
     align-items: center;
     justify-content: space-between;
