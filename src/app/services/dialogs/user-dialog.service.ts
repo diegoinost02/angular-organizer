@@ -2,7 +2,6 @@ import { Injectable, inject } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileComponent } from '../../components/layout/components/profile/profile.component';
 import { EditUserComponent } from '../../components/layout/components/profile/components/edit-user/edit-user.component';
-import { UpdateUserDto, User } from '../../interfaces/user.model';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable({
@@ -25,6 +24,10 @@ export class UserDialogService {
       data: userId,
       height: 'auto', width: 'auto'
     })
+  }
+
+  closeAllDialogs() {
+    this.dialog.closeAll();
   }
 
   openSnackBar(message: string, action: string) {

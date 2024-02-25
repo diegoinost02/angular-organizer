@@ -32,11 +32,15 @@ export class ProfileComponent {
     this.openEdit();
   }
 
+  deleteAccount() {
+    this.userService.valueToEdit.update(() => 'delete');
+    this.openEdit();
+  }
+
   openEdit(){
     if(this.user$()!.id) {
       this.userDialogService.openEditUser(this.user$()!.id);
     }
   }
 
-  deleteAccount() {}
 }

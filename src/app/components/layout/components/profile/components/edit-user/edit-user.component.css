@@ -33,6 +33,15 @@ button {
     align-items: center;
     justify-content: center;
 }
+.button-delete{
+    color: white;
+    padding: 15px 0;
+    background-color: #c21717;
+    width: 400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 .button-view-password{
     margin-right: 5px;
     background-color: transparent;

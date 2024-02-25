@@ -15,3 +15,6 @@ export interface UpdateUserDto extends Omit<User, 'folders' | 'notes' | 'roles' 
     password: string;
     newPassword: string | null;
 }
+export interface verifyPasswordDto {
+    password: string;
+}

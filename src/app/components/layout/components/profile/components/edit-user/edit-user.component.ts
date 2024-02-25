@@ -1,7 +1,7 @@
 import { Component, DestroyRef, inject } from '@angular/core';
 import { UserService } from '../../../../../../services/user.service';
 import { FormBuilder, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import { MatFormField, MatFormFieldModule } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
 import { RequestStatus } from '../../../../../../interfaces/request-status.model';
@@ -27,6 +27,7 @@ export class EditUserComponent {
   private user$ = this.userService.user$;
   protected valueToEdit = this.userService.valueToEdit;
 
+  private dialogRef = inject(MatDialogRef);
   private destroyRef = inject(DestroyRef);
 
   hidePassword: boolean = true;
@@ -52,6 +53,8 @@ export class EditUserComponent {
           this.user$.update(() => user);
           this.status = 'success';
           this.userDialogService.openSnackBar('Cambios guardados con éxito', 'Cerrar');
+          this.dialogRef.close();
+
         },
         error: () => {
           this.status = 'failed';
@@ -63,6 +66,42 @@ export class EditUserComponent {
       this.userDialogService.openSnackBar('Cambios guardados con éxito', 'Cerrar');
     }
   }
+
+  verifyAndDelete(): void {
+    if(this.userForm.controls.password.valid) {
+      this.status = 'loading';
+      const password  = this.userForm.getRawValue().password;
+      this.userService.verifyPassword(this.userId, {password})
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (user: User) => {
+          this.deleteAccount()
+        },
+        error: () => {
+          this.status = 'failed';
+          this.userDialogService.openSnackBar('Contraseña incorrecta', 'Cerrar');
+        }
+      })
+    }
+  }
+  deleteAccount(): void {
+    this.status = 'loading';
+    this.userService.deleteUser(this.userId)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe({
+        next: (user: User) => {
+          this.userService.logout();
+          this.userDialogService.closeAllDialogs();
+          this.userDialogService.openSnackBar('Cuenta eliminada con éxito', 'Cerrar');
+          this.status = 'success';
+        },
+        error: () => {
+          this.status = 'failed';
+          this.userDialogService.openSnackBar('No se pudo eliminar la cuenta', 'Cerrar');
+        }
+      })
+  }
+
 
   getUsernameErrorMessage() {
     if(this.userForm.controls.username.hasError('required')){
