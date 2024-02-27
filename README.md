@@ -1,27 +1,74 @@
-# AngularOrganizer
+# Organizer
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.0.3.
+La mejor aplicación para organizarte.
 
-## Development server
+## Características
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+- Autenticación basada en JWT.
+- Implementación de Refresh Token para una mejor experiencia de usuario.
+- Encriptado de datos sensibles, garantizando la seguridad.
+- Implementación de Guards, garantizando la seguridad y una mejor experiencia de usuario.
+- Creación de carpetas y notas/tares personalizables.
+- Edición y validaciones de datos de usuario.
+- Diseño responsive.
+- Futuras actualizaciones.
 
-## Code scaffolding
+## Requerimientos
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Para la base de datos, se necesita tener MySQL instalado.
 
-## Build
+Para el backend, se necesita tener instalado una versión de JDK igual o mayor que 21 y Spring Tools.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Para el frontend, se necesita tener Angular 17 y una versión de Node mayor que 18.
 
-## Running unit tests
+## ¿Cómo usar?
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Crea una base de datos MySQL con el siguiente script:
 
-## Running end-to-end tests
+- https://github.com/diegoinost02/database-organizer/blob/main/organizer-database.sql
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
-## Further help
+2. Clona los repositorios de manera local:
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+git clone https://github.com/diegoinost02/springboot-organizer.git
+```
+
+```bash
+git clone https://github.com/diegoinost02/angular-organizer.git
+```
+
+## Configuracion Backend
+
+Configurar el usuario y contraseña de tu local MySQL en el archivo application.properties.
+
+```code
+spring.datasource.url=jdbc:mysql://localhost:3306/db_organizer
+spring.datasource.username=root
+spring.datasource.password=admin
+```
+> [!IMPORTANT]  
+> Si ha cambiado el nombre de la base de datos, asegúrate de actualizarlo también en el archivo application.properties: (spring.datasource.url=jdbc:mysql://localhost:3306/database_name).
+
+
+## Ejecución
+
+#### Backend
+Ejecutar la app en el puerto 8080 (Puerto por defecto de Spring).
+
+#### Frontend
+Instalar las dependencias y ejecutar la app en el puerto 4200 (Puerto por defecto de Angular).
+
+```bash
+  npm install
+```
+```bash
+  npm run start
+```
+
+> [!IMPORTANT]  
+> Si ejecutas el servidor del frontend en un puerto distinto, deberás cambiar la configuración de CORS en el archivo SecurityConfig.java. Si ejecutas el servidor del backend en un puerto distinto, deberás cambiar la API_URL en el archivo environments.ts.
+
+## Author
+
+- [@diegoinost02](https://github.com/diegoinost02)
