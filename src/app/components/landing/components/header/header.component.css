@@ -33,7 +33,7 @@ header{
 @media(width<=1000px){
     .header-container{
         grid-template-columns: repeat(1, 1fr);
-        gap: 30px;
+        gap: 50px;
 
         .get-started-button{
             margin-top: 10px;
@@ -43,6 +43,7 @@ header{
 
 @media(width<=374px){
     .header-container{
+        gap: 35px;
         h1{
             font-size: calc(40px - 2vw);
         }
