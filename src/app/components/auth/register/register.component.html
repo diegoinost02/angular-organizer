@@ -1,6 +1,6 @@
 <section>
     <div>
-        <form [formGroup]="registerForm" novalidate (ngSubmit)="register()">
+        <form [formGroup]="registerForm" novalidate class="form" (ngSubmit)="register()">
             <div class="title">
                 <h1>Organizer</h1>
             </div>
@@ -91,7 +91,8 @@
         </form>
 
         <footer class="footer">
-            <p>¿Ya tienes una cuenta? <button class="button-login" (click)="openLogin()">Iniciar sesión</button></p>
+            <p>¿Ya tienes una cuenta?</p>
+            <button class="button-login" (click)="openLogin()">Iniciar sesión</button>
         </footer>
     </div>
 
