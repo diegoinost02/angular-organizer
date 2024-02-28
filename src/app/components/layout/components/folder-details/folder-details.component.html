@@ -1,4 +1,4 @@
-<mat-dialog-content>
+<mat-dialog-content class="content">
     <h3>Carpeta</h3>
     <form [formGroup]="folderForm" (ngSubmit)="saveChanges()">
         <input
@@ -11,7 +11,7 @@
     </form>
 </mat-dialog-content>
 
-<mat-dialog-actions align="end">
+<mat-dialog-actions align="end" class="actions">
     <button id="close-btn" mat-button mat-dialog-close matTooltip="Cancelar">
         <img class="svg" src="/assets/svg/close.svg" alt="close">
     </button>

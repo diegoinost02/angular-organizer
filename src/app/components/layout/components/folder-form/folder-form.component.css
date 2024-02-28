@@ -4,6 +4,31 @@ mat-dialog-content {
     align-items:baseline;
     justify-content: center;
 }
+
+@media(width<= 850px) {
+    .content{
+        padding: 10px;
+    }
+    form{
+        width: 70vw;
+        .input-name {
+            width: 100%;
+            font-size: 25px;
+        }
+    }
+}
+
+@media(width<= 500px) {
+    .content{
+        height: 180px;
+    }
+    form{
+        .input-name {
+            font-size: 15px;
+        }
+    }
+}
+
 mat-dialog-actions{
     padding: 10px;
 }
