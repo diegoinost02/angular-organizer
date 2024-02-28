@@ -1,11 +1,15 @@
 <section>
     <header>
+        <button class="btn-menu" type="button" mat-button (click)="drawer.toggle()" [ngClass]="{'btn-menu-opened': drawer.opened === true}">
+            <img class="img-menu" src="/assets/svg/menu.svg" alt="menu">
+        </button>
+        
         @if(folderSelected$()) {
             <h1 class="folder-name" (click)="openFolder(folderSelected$()!)">
                 {{folderSelected$()?.name}}
             </h1>
         } @else if(isEmpty()) {
-            <h1> No tienes carpetas aún </h1>
+            <h1 class="no-folders"> No tienes carpetas aún </h1>
         }
         <button class="add-note" (click)="!folderSelected$() ? createFolder() : createNote()">
             <p> {{ !folderSelected$() ? 'Crear carpeta': 'Crear nota'}} </p>

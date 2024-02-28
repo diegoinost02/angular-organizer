@@ -16,8 +16,29 @@ mat-drawer {
     padding: 0 20px 20px 20px;
     font-size: 14px;
     border: none;
+    overflow: hidden;
+}
+mat-drawer-content{
+    overflow: hidden;
 }
 
+@media(width <= 750px){
+    mat-drawer{
+        padding: 0 7px 7px 7px;
+        width: 50vw;
+    }
+}
+@media(width <= 500px){
+    mat-drawer{
+        padding: 0 7px 7px 7px;
+        width: 65vw;
+    }
+}
+@media(width <= 400px){
+    mat-drawer{
+        width: 80vw;
+    }
+}
 h3{
     margin-top: 30px;
     margin-bottom: 20px;
@@ -164,6 +185,10 @@ strong{
 }
 .ancor-folder, .btn-actions{
     font-weight: 350;
+}
+.ancor-profile{
+    overflow: hidden;
+    white-space: nowrap;
 }
 .ancor-profile span{
     font-style:oblique;

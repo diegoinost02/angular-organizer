@@ -1,4 +1,4 @@
-import { Component, DestroyRef, effect, inject } from '@angular/core';
+import { Component, DestroyRef, Input, effect, inject } from '@angular/core';
 import { Note } from '../../../../interfaces/note.model';
 import { NoteService } from '../../../../services/note.service';
 import { NoteDialogService } from '../../../../services/dialogs/note-dialog.service';
@@ -6,11 +6,13 @@ import { UserService } from '../../../../services/user.service';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { FolderDialogService } from '../../../../services/dialogs/folder-dialog.service';
 import { Folder } from '../../../../interfaces/folder.model';
+import { MatDrawer } from '@angular/material/sidenav';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-notes',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './notes.component.html',
   styleUrl: './notes.component.css'
 })
@@ -25,6 +27,12 @@ export class NotesComponent{
 
   folderSelected$ = this.userService.folderSelected$;
   userNotes$ = this.userService.userNotes$;
+
+  @Input() drawer!: MatDrawer;
+
+  isDrawerOpened(): boolean {
+    return this.drawer.opened;
+  }
 
   constructor() {
     effect(()=>{

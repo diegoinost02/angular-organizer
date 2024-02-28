@@ -1,5 +1,5 @@
-<mat-drawer-container class="container" autosize>
-    <mat-drawer #drawer class="side-bar" mode="side" opened>
+<mat-drawer-container class="container" autosize [hasBackdrop]="isOver ? 'true' : 'false'">
+    <mat-drawer #drawer class="side-bar" [mode]="isOver ? 'over' : 'side'" [opened]="hideDrawer ? false : true">
       <header>
         <h3>Organizer</h3>
       </header>
@@ -86,7 +86,9 @@
     </div>
     </mat-drawer>
 
-    <app-notes></app-notes>
+    <mat-drawer-content>
+        <app-notes [drawer]="drawer"></app-notes>
+    </mat-drawer-content>
 </mat-drawer-container>
 
 <!-- <app-footer></app-footer> -->

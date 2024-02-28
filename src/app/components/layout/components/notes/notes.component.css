@@ -6,7 +6,27 @@ section{
     min-height: 100%;
     box-sizing: border-box;
 }
-  
+
+@media(width <= 600px){
+    section{
+        padding: 30px 10px;
+    }
+}
+@media(width <= 780px){
+    .no-folders{
+        display: none;
+    }
+}
+@media(width <= 400px){
+    .folder-name{
+        font-size: 35px;
+
+    }
+    .no-folders{
+        display: none;
+    }
+}
+
 h1{
     font-size: 40px;
     margin: 0;
@@ -20,10 +40,15 @@ h1{
 }
 .notes-container{
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(800px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(800px, 1fr));
     /* grid-template-columns: repeat(1, 1fr); */
     gap: 10px;
     margin-top: 30px;
+}
+@media(width <= 1100px){
+    .notes-container{
+        grid-template-columns: repeat(auto-fill, minmax(90%, 1fr));
+    }
 }
 .note-card{
     /* background-color: rgb(30, 30, 30); */
@@ -32,14 +57,19 @@ h1{
 
     border-radius: 5px;  
     box-sizing: border-box;
-    padding: 15px;
+    padding: 15px 20px;
     cursor: pointer;
     box-sizing: border-box;
-    min-height: 170px;
+    min-height: 150px;
+
     h2{
         margin: 0;
     }
     p{
+        margin: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
         color: #c7c7c7;
     }
 }
@@ -65,12 +95,16 @@ h1{
     opacity: .8;
 }
 .svg-folder-empty{
-    height: 500px;
+    /* height: 500px; */
+    max-height: 100%;
+    width: 90%;
+    aspect-ratio: 1.1/1;
 }
 .note-card:hover{
     border: .5px solid #5a5a5a;
 }
 header{
+    height: 60px;
     width: 100%;
     display: flex;
     align-items: center;
@@ -80,6 +114,15 @@ button{
     border: none;
     cursor: pointer;
     outline: none;
+}
+.btn-menu{
+    background: transparent;
+}
+.img-menu, .btn-menu-opened{
+    transition: transform 0.5s ease;
+}
+.btn-menu-opened{
+    transform: rotate(180deg);
 }
 .add-note{
     display: flex;

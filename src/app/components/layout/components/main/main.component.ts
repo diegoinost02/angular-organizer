@@ -1,4 +1,4 @@
-import { Component, inject} from '@angular/core';
+import { Component, OnInit, inject} from '@angular/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import { Folder } from '../../../../interfaces/folder.model';
 import { NotesComponent } from '../notes/notes.component';
@@ -17,7 +17,7 @@ import { UserDialogService } from '../../../../services/dialogs/user-dialog.serv
   templateUrl: './main.component.html',
   styleUrl: './main.component.css'
 })
-export class MainComponent{
+export class MainComponent implements OnInit{
 
   private userService = inject(UserService);
   private folderDialogService = inject(FolderDialogService);
@@ -28,6 +28,15 @@ export class MainComponent{
   folderSelected$ = this.userService.folderSelected$;
 
   isOpenUserMenu: boolean = false;
+  hideDrawer: boolean = false;
+  isOver: boolean = false;
+
+  ngOnInit(): void {
+      if(window.innerWidth <= 750){
+        this.hideDrawer = true;
+        this.isOver = true;
+      }
+  }
 
   folderToOpenOverlay: Number = -1;
   openFolderMenu(folderId: number) {

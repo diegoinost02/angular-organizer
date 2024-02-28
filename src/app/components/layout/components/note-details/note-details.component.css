@@ -3,6 +3,7 @@ mat-dialog-content {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    /* overflow: hidden; */
 }
 mat-dialog-actions{
     padding: 10px;
