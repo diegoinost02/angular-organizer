@@ -4,6 +4,20 @@ mat-dialog-content {
     align-items: center;
     justify-content: center;
 }
+@media(width<= 850px) {
+    .input-title, .input-description{
+        width: 100%;
+    }
+}
+
+@media(width<= 500px) {
+    form{
+        .input-title{
+            font-size: 25px;
+        }
+    }
+}
+
 mat-dialog-actions{
     padding: 10px;
 }

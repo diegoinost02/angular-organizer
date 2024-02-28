@@ -2,13 +2,13 @@
     <form [formGroup]="noteForm" (ngSubmit)="saveChanges()">
         <input
             formControlName="title"
-            class="title-edit"
+            class="input-title"
             type="text"
             maxlength="30"
             >
         <textarea
             formControlName="description"
-            class="description-edit"
+            class="input-description"
             type="text"
             maxlength="2000"
             >
@@ -17,20 +17,24 @@
 </mat-dialog-content>
 
 <mat-dialog-actions align="end">
-    <button id="close-btn" mat-button mat-dialog-close matTooltip="Cerrar">
-        <img class="svg" src="/assets/svg/close.svg" alt="close">
-    </button>
+    <div>
+        <button id="close-btn" mat-button mat-dialog-close matTooltip="Cerrar">
+            <img class="svg" src="/assets/svg/close.svg" alt="close">
+        </button>
 
-    <button id="file-off-btn" mat-button mat-dialog-close (click)="archiveNote(noteData.id)" matTooltip="Archivar">
-        <img class="svg" src="/assets/svg/file-off.svg" alt="close">
-    </button>
+        <button id="file-off-btn" mat-button mat-dialog-close (click)="archiveNote(noteData.id)" matTooltip="Archivar">
+            <img class="svg" src="/assets/svg/file-off.svg" alt="close">
+        </button>
+    </div>
 
-    <button type="submit" id="edit-btn" mat-button (click)="saveChanges()" matTooltip="Guardar">
-        <img class="svg" src="/assets/svg/save.svg" alt="save">
-    </button>
+    <div>
+        <button type="submit" id="edit-btn" mat-button (click)="saveChanges()" matTooltip="Guardar">
+            <img class="svg" src="/assets/svg/save.svg" alt="save">
+        </button>
 
-    <button id="delete-btn" mat-button (click)="deleteNote(noteData.id)" matTooltip="Eliminar">
-        <img class="svg" src="/assets/svg/trash.svg" alt="delete">
-    </button>
+        <button id="delete-btn" mat-button (click)="deleteNote(noteData.id)" matTooltip="Eliminar">
+            <img class="svg" src="/assets/svg/trash.svg" alt="delete">
+        </button>
+    </div>
     
 </mat-dialog-actions>

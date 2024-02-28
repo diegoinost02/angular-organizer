@@ -14,16 +14,19 @@ section{
 }
 @media(width <= 780px){
     .no-folders{
+        font-size: 25px;
+    }
+}
+@media(width <= 520px){
+    .no-folders{
+        font-size: 18px;
         display: none;
     }
 }
+
 @media(width <= 400px){
     .folder-name{
         font-size: 35px;
-
-    }
-    .no-folders{
-        display: none;
     }
 }
 
@@ -33,6 +36,10 @@ h1{
     padding: 0 3px;
     color: white;
     opacity: .9;
+
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
 }
 .folder-name:hover{
     cursor: pointer;

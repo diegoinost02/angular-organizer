@@ -5,6 +5,29 @@ mat-dialog-content {
     justify-content: center;
     /* overflow: hidden; */
 }
+@media(width<= 850px) {
+    .input-title, .input-description{
+        width: 100%;
+    }
+}
+@media(width<= 500px) {
+    form{
+        .input-title{
+            font-size: 25px;
+        }
+    }
+}
+@media(width<= 370px) {
+    mat-dialog-actions{
+        gap: 15px;
+        div{
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+        }
+    }
+}
+
 mat-dialog-actions{
     padding: 10px;
 }
@@ -22,14 +45,14 @@ input, textarea{
     box-sizing: border-box;
     padding: 20px 20px;
 }
-.title-edit{
+.input-title{
     /* background-color: rgba(255, 255, 255, 0.037); */
     margin: 0 0 16px;
     color: rgb(255, 255, 255);
     font-size: 35px;
     height: 75px;
 }
-.description-edit{
+.input-description{
     display: flex;
     text-align: start; 
     color: rgb(197, 197, 197);
@@ -39,7 +62,7 @@ input, textarea{
     resize: none;
     font-family: inherit;
 }
-.title-edit:hover, .description-edit:hover{
+.input-title:hover, .input-description:hover{
     border: .5px solid rgba(135, 135, 135, 0.637);
 }
 .svg{
