@@ -146,6 +146,7 @@ button{
     gap: 2px;
 
     p{
+        white-space: nowrap;
         margin: 0;
     }
 }

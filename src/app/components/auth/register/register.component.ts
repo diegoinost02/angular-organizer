@@ -57,8 +57,7 @@ export class RegisterComponent {
           this.router.navigate([`/${username}`]);
           this.dialogRef.close();
         },
-        error: (err) => {
-          console.error(err);
+        error: () => {
           this.status = 'failed';
           this.openSnackBar('Error al registrar el usuario', 'Cerrar')
         }}

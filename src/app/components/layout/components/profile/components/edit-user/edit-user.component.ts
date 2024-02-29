@@ -62,7 +62,9 @@ export class EditUserComponent {
         }
       })
     }
-    else {
+    else if (this.userForm.value.password === '') {
+      this.userDialogService.openSnackBar('No has ingresado tu contraseña', 'Cerrar');
+    } else {
       this.userDialogService.openSnackBar('Cambios guardados con éxito', 'Cerrar');
     }
   }
