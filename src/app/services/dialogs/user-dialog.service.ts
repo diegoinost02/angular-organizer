@@ -22,7 +22,8 @@ export class UserDialogService {
   openEditUser(userId: number) {
     this.dialog.open(EditUserComponent, {
       data: userId,
-      height: 'auto', width: 'auto'
+      height: 'auto', width: 'auto',
+      backdropClass: "background-dialog-blur"
     })
   }
 

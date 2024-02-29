@@ -7,7 +7,33 @@ form {
     padding: 50px 0;
     background-color: #252525;
 }
-
+@media(width <= 600px) {
+    .form {
+        width: 100%;
+        mat-form-field {
+            width: 90%;
+        }
+        .button-submit{
+            width: 90%;
+        }
+        .button-delete{
+            width: 90%;
+        }
+    }
+}
+@media(width <= 355px) {
+    .form {
+        input, mat-label{
+            font-size: 12px;
+    
+        }
+    }
+}
+@media(width <= 375px) {
+    mat-error{
+        display: none;
+    }
+}
 mat-form-field {
     margin: 0 30px;
     height: 75px;
