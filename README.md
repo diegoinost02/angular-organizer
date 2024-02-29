@@ -8,8 +8,9 @@ La mejor aplicación para organizarte.
 - Implementación de Refresh Token.
 - Encriptado de datos sensibles, garantizando la seguridad.
 - Implementación de Guards, garantizando la seguridad y una mejor experiencia de usuario.
-- Creación de carpetas y notas/tares personalizables.
+- Signals para la reactividad.
 - Edición y validaciones de datos de usuario.
+- Creación de carpetas y notas/tareas personalizables.
 - Diseño responsive.
 - Futuras actualizaciones.
 
