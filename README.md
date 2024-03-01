@@ -2,6 +2,8 @@
 
 La mejor aplicación para organizarte.
 
+Landing demo: https://organizer-eta.vercel.app/
+
 ## Características
 
 - Autenticación basada en JWT.
